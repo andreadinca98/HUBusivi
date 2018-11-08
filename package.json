@@ -1,0 +1,23 @@
+{
+  "name": "progettois2",
+  "version": "1.0.0",
+  "description": "<b>Data di inizio del progetto:</b>",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreadinca98/ProgettoIS2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andreadinca98/ProgettoIS2/issues"
+  },
+  "homepage": "https://github.com/andreadinca98/ProgettoIS2#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}
