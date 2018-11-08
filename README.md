@@ -4,6 +4,9 @@
 Membri:
 
 Andrea D'Incà<br>
-Federico Rodigari<br> Giulio Mattolin<br> Ilaria Enache<br> Pretto Stefano
+Federico Rodigari<br> 
+Giulio Mattolin<br> 
+Ilaria Enache<br> 
+Pretto Stefano
 
 Apiary: https://app.apiary.io/ingegneriasoftware2/editor
