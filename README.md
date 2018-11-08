@@ -3,6 +3,7 @@
 30 ottobre 2018
 Membri:
 
-Andrea D'Incà, Federico Rodigari, Giulio Mattolin, Ilaria Enache, Pretto Stefano
+Andrea D'Incà<br>
+Federico Rodigari<br> Giulio Mattolin<br> Ilaria Enache<br> Pretto Stefano
 
 Apiary: https://app.apiary.io/ingegneriasoftware2/editor
