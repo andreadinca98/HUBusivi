@@ -1,1 +1,1 @@
-start: api.js
+web: node api.js
