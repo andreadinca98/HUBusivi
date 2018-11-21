@@ -3,53 +3,17 @@ HOST: http://polls.apiblueprint.org/
 
 # andreadinca98 
 
+Progetto Ingegneria Del Software 2 - Università degli studi di Trento
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+### Log-in [GET]
 
-## Questions Collection [/questions]
-
-### List All Questions [GET]
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+Inserire i dati per effettuare il login. Verrà eseguito l'accesso con le relative opportunità.
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "username": "aaa@mail.com",
+            "password": "abcd1234"
         }
 
 + Response 201 (application/json)
