@@ -2,435 +2,80 @@ FORMAT: 1A
 HOST: http://polls.apiblueprint.org/
 
 # andreadinca98 
+#ciao 
 
 Polls is a simple API allowing consumers to view polls and vote in them.
 
-## Exams [/exams]
+## Questions Collection [/questions]
 
-### List of Exams [GET]
-
-+ Response 200 (application/json)
-
-        [
-            {
-            "nameExam": "",
-            "nameProf": "",
-            "deadline":  "gg/mm/aa ore:min",
-            "question" : ["q1","q2","qn"]
-            },
-            {
-            "nameExam": "",
-            "nameProf": "",
-            "deadline":  "gg/mm/aa ore:min",
-            "question" : ["q1","q2","qn"]
-            }
- 
-        ]
-
-##  Exam[/deliverdExam]
-
-### deliverd Exam [GET]
+### List All Questions [GET]
 
 + Response 200 (application/json)
 
         [
             {
-            "nameExam":"",
-                "studentsAnswers":[
-                    {"studentId":"", 
-                        "answers":[
-                            {  
-                            "questionText":"",
-                            "answersText":""
-                            }
-                        ]
+                "question": "Favourite programming language?",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "choices": [
+                    {
+                        "choice": "Swift",
+                        "votes": 2048
+                    }, {
+                        "choice": "Python",
+                        "votes": 1024
+                    }, {
+                        "choice": "Objective-C",
+                        "votes": 512
+                    }, {
+                        "choice": "Ruby",
+                        "votes": 256
                     }
                 ]
             }
- 
-        ]    
-
-## Exam[/createExam]
-### create exam [POST]
-+ Request (application/json)
-
-        {
-          "nameExam": "..",
-          "profId": "1234",
-          "deadline": "gg/mm/aa ore:min",
-          "description": "information for students",
-          "question" : [{
-            "text":"",
-            "answer": ""
-          }]
-          
-        }
-    
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /createExam/
-
-
-            
-## Exam[/deleteExam]   
-
-### delete exam [DELETE]
-
-+ Request (application/json)
-
-        {
-            "profId": "1234",
-            "examId": "09876"
-          
-        }
-    
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /deleteExam/
-
-
-
-## Exam[/updateExam]   
-
-### update exam [PUT]
-
-+ Request (application/json)
-
-        {
-          "nameExam": "..",
-          "profId": "1234",
-          "examId": "09876",
-            "deadline": "gg/mm/aa ore:min",
-          "description": "information for students",
-          "peerReviewed" : "true or false",
-          "question" : [{
-            "text":"",
-            "answer": ""
-          }]
-          
-        }
-    
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /updateExam/
- 
-## Exam[/correctionExams]   
-
-### correction exams [POST]
-
-+ Request (application/json)
-
-        {
-         "professorId": "",
-         "studentId": "0123456",
-         "examId": "0987654",
-            "answer" : [{
-                 "questionId":"",
-                 "text": "",
-                 "mark": ""
-            }]
-         "finalMark":""
-            
-          
-         }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /correctionExam/          
-
-
-## Exam[/deliveryExam]   
-
-### delivery Exam [POST]
-
-+ Request (application/json)
-
-        {
-        
-         "studentId": "0123456",
-         "IP": "192.168.1.1",
-         "questionexamId": "237846",
-         "answer": [{
-            "questionId":"1726487",
-            "text": ".."
-         
-         }]
-          
-        }
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /deliveryExam/  
-  
-
-
-
-
-## Assignments [/assignments]
-
-### List of Assignments [GET]
-
-+ Response 200 (application/json)
-
-        [
-            {
-            "nameAssignment": "",
-            "nameProf": "",
-            "deadline":  "gg/mm/aa ore:min",
-            "question" : ["q1","q2","qn"]
-            },
-            {
-            "nameAssignment": "",
-            "nameProf": "",
-            "deadline":  "gg/mm/aa ore:min",
-            "question" : ["q1","q2","qn"]
-            }
- 
         ]
-        
-   
 
-## Assignment[/deliverdAssignment]
+### Create a New Question [POST]
 
-### deliverd Assignments [GET]
+You may create your own question using this action. It takes a JSON
+object containing a question and a collection of answers in the
+form of choices.
 
-+ Response 200 (application/json)
++ Request (application/json)
 
-        [
+        {
+            "question": "Favourite programming language?",
+            "choices": [
+                "Swift",
+                "Python",
+                "Objective-C",
+                "Ruby"
+            ]
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /questions/2
+
+    + Body
+
             {
-            
-            "assignmentsId": "",
-            "profId": "",
-            "teacherAssistentId":"",
-                "studentsAnswers":[
-                    {"studentId":"", 
-                        "answers":[
-                            {  
-                            "questionText":"",
-                            "answersText":""
-                            }
-                        ]
+                "question": "Favourite programming language?",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "choices": [
+                    {
+                        "choice": "Swift",
+                        "votes": 0
+                    }, {
+                        "choice": "Python",
+                        "votes": 0
+                    }, {
+                        "choice": "Objective-C",
+                        "votes": 0
+                    }, {
+                        "choice": "Ruby",
+                        "votes": 0
                     }
                 ]
             }
- 
-        ]       
-
-
-
-
- 
-## Assignment[/createAssigment]   
-
-### create assigment [POST]
-
-+ Request (application/json)
-
-        {
-          "profId": "1234",
-          "teacherAssistentID": "123456",
-          "assigmentId": "0987654",
-            "deadline": "gg/mm/aa ore:min",
-          "description": "information for students",
-          "question" : [{
-            "text":"",
-            "answer": ""
-          }]
-          
-        }
-    
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /createAssigment/
-
-
-## Assignment[/deleteAssigment]   
-
-### delete assigment [DELETE]
-
-+ Request (application/json)
-
-        {
-            "profId": "1234",
-            "teacherAssistentID": "123456",
-            "assigmentId": "0987654"
-          
-        }
-    
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /deleteAssigment/
-            
-            
-## Assignment[/updateAssigment]   
-
-### update assigment [PUT]
-
-+ Request (application/json)
-
-        {
-          "profId": "1234",
-          "teacherAssistentID": "123456",
-         "assigmentId": "0987654",
-            "deadline": "gg/mm/aa ore:min",
-          "description": "information for students",
-          "peerReviewed" : "true or false",
-          "question" : [{
-            "text":"",
-            "answer": ""
-          }]
-          
-        }
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /updateAssigment/  
-
-
-## Assignment[/correctionAssignments]   
-
-### correction assignments [POST]
-
-+ Request (application/json)
-
-        {
-         "professorId": "",
-         "teacherAssistentId":"",
-         "studentId": "0123456",
-         "assignmentId": "0987654",
-            "answer" : [{
-                 "questionId":"",
-                 "text": "",
-                 "mark": ""
-            }]
-         "finalMark":""
-            
-          
-         }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /correctionAssignments/  
-            
-
-## Assignment[/deliveryAssignment]   
-
-### delivery Assignment [POST]
-
-+ Request (application/json)
-
-        {
-        
-          "studentId": "0123456",
-          "assigmentId": "0987654",
-          "answer" : [{
-            "questionId":"",
-            "text": ""
-          }]
-          
-        }
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /deliveryAssignment/  
-            
-            
-## Assignment[/correctionAssignment]   
-
-### correction Assignment [POST]
-
-+ Request (application/json)
-
-        {
-          "studentId": "0123456",
-          "assigmentId": "0987654",
-          "answer" : [{
-            "questionId":"",
-            "text": "",
-            "mark": ""
-          }]
-          
-        }
-+ Response 201 (application/json)
-
-    + Headers
-
-             Location: /correctionAssignment/
-            
-
-## LogIn [/logIn]   
-
-### logIn [POST]
-
-+ Request (application/json)
-
-        {
-         "mail": "12345",
-         "password": "........"
-          
-        }
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /logIn/  
-            
-            
-## Comments [/createComments]   
-
-### Create comments [POST]
-
-+ Request (application/json)
-
-        {
-        
-         "text": "",
-         "userId": "012345",
-         "date" : "gg/mm/aa ore:min"
-          
-        }
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /createComments/  
-
-## Comments[/deleteComments]   
-
-### delete comments [DELETE]
-
-+ Request (application/json)
-
-        {
-        
-         "userId": "012345",
-         "userComments": "878374"
-          
-        }
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /deleteComments/
