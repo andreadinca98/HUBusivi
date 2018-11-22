@@ -14,37 +14,59 @@ consumes:
 - application/json
 produces:
 - application/json
+
 paths:
+  /assignment:
+    x-summary: Assignment
+    post: 
+        description: >-
+          Creare un nuovo assignment da parte dell'insegnante 
+        summary: Add an Assignment
+        operationId: AddAssignment
+        parameters:
+          - name: Name 
+            in: query
+            description: Name of assignment
+            type: string
+            x-example: "Compito Gennaio "
+        responses:
+          400:
+            description: Bad request
+          404:
+            description: Resources not found
+          200:
+            description: Successful response
+  
   /marks:
     x-summary: Marks
     post:
-      description: >-
-        Aggiugere un voto corrispondente ad un esame di un determinato studente.
-      summary: Add a Mark
-      operationId: addMark
-      parameters:
-        - name: mark
-          in: query
-          description: voto da aggiungere
-          type: integer
-          x-example: 22
-        - name: matricola
-          in: query
-          description: matricola studente a cui aggiungere il voto
-          type: integer
-          x-example: 123456
-        - name: course_id
-          in: query
-          description: corso corrispondente al voto
-          type: integer
-          x-example: 113355
-      responses:
-        400:
-          description: Bad request
-        404:
-          description: Resources not found
-        200:
-          description: Successful response
+        description: >-
+          Aggiugere un voto corrispondente ad un esame di un determinato studente.
+        summary: Add a Mark
+        operationId: addMark
+        parameters:
+          - name: mark
+            in: query
+            description: voto da aggiungere
+            type: integer
+            x-example: 22
+          - name: matricola
+            in: query
+            description: matricola studente a cui aggiungere il voto
+            type: integer
+            x-example: 123456
+          - name: course_id
+            in: query
+            description: corso corrispondente al voto
+            type: integer
+            x-example: 113355
+        responses:
+          400:
+            description: Bad request
+          404:
+            description: Resources not found
+          200:
+            description: Successful response
   /marks/remove:
     x-summary: Remove marks
     delete:
