@@ -183,3 +183,88 @@ paths:
           description: Resources not found
         200:
           description: Marks average
+  /courses:
+    x-summary: List of courses
+    post:
+      description: >-
+        Get the list of all your courses.
+      summary: List of courses
+      operationId: coursesList
+      parameters:
+        - name: matricola
+          in: query
+          description: matricola of the user
+          type: integer
+          x-example: 123456
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: List of all your courses
+  /courses/add:
+    x-summary: Add course
+    delete:
+      description: >-
+        Add a course(teacher)/Join a course(student)
+      summary: Add a course
+      operationId: addCourse
+      parameters:
+        - name: course data
+          in: query
+          description: course data
+          type: string
+          x-example: 'Ingegneria del software 2'
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+  /courses/remove:
+    x-summary: Remove courses
+    delete:
+      description: >-
+        Remove a course(teacher only)/Leave a course(student only)
+      summary: Remove a course
+      operationId: removeCourse
+      parameters:
+        - name: course_id
+          in: query
+          description: course id of the mark
+          type: integer
+          x-example: 113355
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+  /courses/update:
+    x-summary: Update courses
+    put:
+      description: >-
+        Update a course(teacher only)
+      summary: Update a Mark
+      operationId: updateMark
+      parameters:
+        - name: course info
+          in: query
+          description: course info
+          type: string
+          x-example: 'Ingegneria del software - 2'
+        - name: course_id
+          in: query
+          description: course id
+          type: integer
+          x-example: 113355
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
