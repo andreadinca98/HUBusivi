@@ -2,119 +2,70 @@ swagger: '2.0'
 info:
   version: '1.0'
   title: "HUBusivi"
-  description: Polls is a simple API allowing consumers to view polls and vote in them.
+  description: Progetto Ingegneria Del Software 2 - Università degli studi di Trento
   license:
     name: MIT
     url: https://github.com/apiaryio/polls-api/blob/master/LICENSE
-host: polls.apiblueprint.org
+host: ingegneriasoftwa2.herokuapp.com
 basePath: /
 schemes:
-- http
+- https
 consumes:
 - application/json
 produces:
 - application/json
 paths:
-  /questions:
-    x-summary: Questions Collection
-    get:
-      summary: List All Questions
-      responses:
-        200:
-          description: Successful Response
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Question'
-          examples:
-            application/json:
-              - question: Favourite programming language?
-                published_at: '2015-08-05T08:40:51.620Z'
-                choices:
-                  - choice: Swift
-                    votes: 2048
-                  - choice: Python
-                    votes: 1024
-                  - choice: Objective-C
-                    votes: 512
-                  - choice: Ruby
-                    votes: 256
+  /marks:
+    x-summary: Marks
     post:
       description: >-
-        You may create your own question using this action. It takes a JSON
-        object containing a question and a collection of answers in the
-        form of choices.
-      summary: Create a New Question
+        Aggiugere un voto corrispondente ad un esame di un determinato studente.
+      summary: Add a Mark
+      operationId: addMark
       parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/QuestionRequest'
+        - name: mark
+          in: query
+          description: voto da aggiungere
+          type: integer
+          x-example: 22
+        - name: matricola
+          in: query
+          description: matricola studente a cui aggiungere il voto
+          type: integer
+          x-example: 123456
+        - name: course_id
+          in: query
+          description: corso corrispondente al voto
+          type: integer
+          x-example: 113355
       responses:
-        201:
-          description: ''
+        default:
+          description: Bad request
+        200:
+          description: Successful response
           schema:
-            $ref: '#/definitions/Question'
-          examples:
-            application/json:
-                question: Favourite programming language?
-                published_at: '2015-08-05T08:40:51.620Z'
-                choices:
-                  - choice: Swift
-                    votes: 0
-                  - choice: Python
-                    votes: 0
-                  - choice: Objective-C
-                    votes: 0
-                  - choice: Ruby
-                    votes: 0
+            $ref: ''
 definitions:
-  Question:
-    title: Question
-    type: object
+  mark:
+    title: Mark
+    type: integer
     properties:
-      question:
-        type: string
+      mark:
+        type: integer
       published_at:
         type: string
-      choices:
-        type: array
-        items:
-          $ref: '#/definitions/Choice'
     required:
-      - question
-      - published_at
-      - choices
-  Choice:
-    title: Choice
-    type: object
+      - course_id
+      - student_id
+  course_id:
+    title: course_id
+    type: integer
     properties:
-      votes:
+      id:
         type: integer
-        format: int32
-      choice:
-        type: string
-    required:
-      - votes
-      - choice
-  QuestionRequest:
-    title: Question Request
-    type: object
+  student_id:
+    title: student_id
+    type: integer
     properties:
-      question:
-        type: string
-      choices:
-        type: array
-        items:
-          type: string
-    required:
-      - question
-      - choices
-    example:
-      question: Favourite programming language?
-      choices:
-        - Swift
-        - Python
-        - Objective-C
-        - Ruby
+      id:
+        type: integer
