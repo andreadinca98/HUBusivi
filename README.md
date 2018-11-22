@@ -9,6 +9,6 @@ Giulio Mattolin<br>
 Ilaria Enache<br> 
 Pretto Stefano
 
-Apiary: https://app.apiary.io/ingegneriasoftware2/editor
+Apiary: https://hubusivi.docs.apiary.io/#
 <br>
 Heroku: https://ingegneriasoftwa2.herokuapp.com/
