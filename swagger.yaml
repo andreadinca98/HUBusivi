@@ -14,7 +14,6 @@ consumes:
 - application/json
 produces:
 - application/json
-
 paths:
   /assignment:
     x-summary: Assignment
@@ -40,49 +39,49 @@ paths:
   /marks:
     x-summary: Marks
     post:
-        description: >-
-          Aggiugere un voto corrispondente ad un esame di un determinato studente.
-        summary: Add a Mark
-        operationId: addMark
-        parameters:
-          - name: mark
-            in: query
-            description: voto da aggiungere
-            type: integer
-            x-example: 22
-          - name: matricola
-            in: query
-            description: matricola studente a cui aggiungere il voto
-            type: integer
-            x-example: 123456
-          - name: course_id
-            in: query
-            description: corso corrispondente al voto
-            type: integer
-            x-example: 113355
-        responses:
-          400:
-            description: Bad request
-          404:
-            description: Resources not found
-          200:
-            description: Successful response
+      description: >-
+        Add a mark for a specific test for a student.
+      summary: Add a Mark
+      operationId: addMark
+      parameters:
+        - name: mark
+          in: query
+          description: voto da aggiungere
+          type: integer
+          x-example: 22
+        - name: matricola
+          in: query
+          description: matricola of the student 
+          type: integer
+          x-example: 123456
+        - name: course_id
+          in: query
+          description: course id of the mark
+          type: integer
+          x-example: 113355
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
   /marks/remove:
     x-summary: Remove marks
     delete:
       description: >-
-        Rimuove un voto corrispondente ad un esame di un determinato studente.
+        Remove a mark of a specific exam of a student.
       summary: Remove a Mark
       operationId: removeMark
       parameters:
         - name: matricola
           in: query
-          description: matricola studente a cui rimuovere il voto
+          description: matricola of the student
           type: integer
           x-example: 123456
         - name: course_id
           in: query
-          description: corso corrispondente al voto
+          description: course id of the mark
           type: integer
           x-example: 113355
       responses:
@@ -96,23 +95,23 @@ paths:
     x-summary: Update marks
     put:
       description: >-
-        Modifica un voto corrispondente ad un esame di un determinato studente.
+        Update a mark of an specific exam of a student.
       summary: Update a Mark
       operationId: updateMark
       parameters:
         - name: mark
           in: query
-          description: voto da inserire al posto del precedente
+          description: mark to update
           type: integer
           x-example: 22
         - name: matricola
           in: query
-          description: matricola studente a cui rimuovere il voto
+          description: matricola of the student
           type: integer
           x-example: 123456
         - name: course_id
           in: query
-          description: corso corrispondente al voto
+          description: course id of the mark
           type: integer
           x-example: 113355
       responses:
@@ -127,15 +126,56 @@ paths:
     x-summary: Average course marks
     post:
       description: >-
-        Restituisce la media dei voti ottenuti in un esame di un determintao corso.
+        Calculate the marks average about a specific exam of a course.
       summary: Average course marks
       operationId: addMark
       parameters:
         - name: course_id
           in: query
-          description: corso di cui fare la media delle valutazioni
+          description: exam id to be averaged
           type: integer
           x-example: 113355
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Marks average
+          
+  /students/add:
+    x-summary: Add a student on the database
+    post:
+      description: >-
+         Add a student on the database.
+      summary: Add a student on the database
+      operationId: addStudent
+      parameters:
+        - name: student_attributes
+          in: query
+          description: data of the student
+          type: string
+          x-example: "Pinco pallino"
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Marks average
+  /students/remove:
+    x-summary: Remove a student from the database
+    delete:
+      description: >-
+        Remove a student from the database.
+      summary: Remove a student from the database
+      operationId: addStudent
+      parameters:
+        - name: matricola
+          in: query
+          description: corso di cui fare la media delle valutazioni
+          type: string
+          x-example: "Pinco pallino"
       responses:
         400:
           description: Bad request
