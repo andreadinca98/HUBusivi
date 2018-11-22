@@ -19,7 +19,7 @@ paths:
     x-summary: Assignment
     post: 
         description: >-
-          Creare un nuovo assignment da parte dell'insegnante 
+         Teacher creates a new assignment
         summary: Add an Assignment
         operationId: AddAssignment
         parameters:
@@ -27,7 +27,18 @@ paths:
             in: query
             description: Name of assignment
             type: string
-            x-example: "Compito Gennaio "
+            x-example: "Compito Gennaio"
+          - name: Date
+            in: query
+            description: Date of assignment
+            type: string
+            x-exaple: "11/11/2018"
+          - name: Delivery date
+            in: query
+            description: Delivery date of assignment
+            type: string
+            x-exaple: "12/12/2018"
+          
         responses:
           400:
             description: Bad request
@@ -35,7 +46,56 @@ paths:
             description: Resources not found
           200:
             description: Successful response
-  
+  /assignment/remove:
+    x-summary: Remove assignment
+    delete:
+      description: >-
+        Remove a specific assignment
+      summary: Remove an assignment
+      operationId: removeAssignment
+      parameters:
+        - name: Name
+          in: query
+          description: name of assignment
+          type: string
+          x-example: "Compito Gennaio"
+        - name: Date
+          in: query
+          description: Date of assignment
+          type: string
+          x-exaple: "11/11/2018"
+        - name: Delivery date
+          in: query
+          description: Delivery date of assignment
+          type: string
+          x-exaple: "12/12/2018"
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response  
+  /assignment/update:
+    x-summary: Update assignment
+    delete:
+      description: >-
+        Update a specific assignment
+      summary: Update an assignment
+      operationId: updateAssignment
+      parameters:
+        - name: Name
+          in: query
+          description: name of assignment
+          type: string
+          x-example: "Compito Gennaio"
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response  
   /marks:
     x-summary: Marks
     post:
