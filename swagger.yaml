@@ -34,7 +34,7 @@ paths:
         404:
           description: Resources not found
         200:
-          description: Marks average
+          description: Successful response
   
     delete:
       summary: Remove a student from the database
@@ -42,7 +42,7 @@ paths:
       parameters:
         - name: matricola
           in: query
-          description: corso di cui fare la media delle valutazioni
+          description: Matricola of the student that I want delete
           type: string
           x-example: "Pinco pallino"
       responses:
@@ -51,7 +51,7 @@ paths:
         404:
           description: Resources not found
         200:
-          description: Marks average
+          description: Successful response
   
   /assignment:
     post: 
@@ -133,7 +133,7 @@ paths:
     
     post:
       tags:
-      - "Marks"
+      - "Marks(only teacher)"
       summary: Add a Mark
       operationId: addMark
       parameters:
@@ -183,7 +183,7 @@ paths:
           description: Successful response
 
     put:
-      summary: Update a Mark of a specific exam of a student
+      summary: Update a mark of a specific exam of a student
       operationId: updateMark
       parameters:
         - name: mark
@@ -218,7 +218,7 @@ paths:
       parameters:
         - name: course_id
           in: query
-          description: exam id to be averaged
+          description: Course which I want to get the average of marks
           type: integer
           x-example: 113355
       responses:
@@ -273,7 +273,7 @@ paths:
       parameters:
         - name: course_id
           in: query
-          description: course id of the mark
+          description: Course which I want delete/leave
           type: integer
           x-example: 113355
       responses:
