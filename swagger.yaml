@@ -96,25 +96,11 @@ paths:
       summary: Remove an assignment
       operationId: removeAssignment
       parameters:
-        - name: Name
+        - name: assignmentId
           in: query
           description: name of assignment
           type: string
-          x-example: "Compito Gennaio"
-        - name: Date
-          in: query
-          description: Date of assignment
-          type: string
-          x-example: "11/11/2018"
-        - name: Delivery date
-          in: query
-          description: Delivery date of assignment
-          type: string
-          x-example: "12/12/2018"
-        - name: assignmentId
-          in: query
-          type: integer
-          x-example: "113425"
+          x-example: "124354"
       responses:
         400:
           description: Bad request
@@ -140,8 +126,63 @@ paths:
         200:
           description: Successful response
           
+  /exam:
+    post:
+      tags: 
+      - "Exam"
+      summary: Add a exam on the database
+      operationId: addExam
+      parameters:
+        - name: Name
+          in: query
+          description: name of the exam
+          type: string
+          x-example: "Pinco pallino"
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+
+  /exam/examId:  
+    delete:
+      summary: Remove an exam
+      operationId: removeExam
+      parameters:
+      - name: examId
+        in: query
+        description: id of the exam
+        type: integer
+        x-example: 312422
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response  
+  
+    put:
+      summary: Update an exam
+      operationId: updateExam
+      parameters:
+        - name: examId
+          in: query
+          description: id of the exam
+          type: string
+          x-example: "156785"
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+
+          
   /marks:
-    
     post:
       tags:
       - "Marks"
