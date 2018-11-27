@@ -76,6 +76,11 @@ paths:
             description: Delivery date of assignment
             type: string
             x-exaple: "12/12/2018"
+          - name: Text
+            in: query
+            description: Text of the assignment
+            type: string
+            x-exaple: "Voglio un programma in javascript che faccia..."
           
         responses:
           400:
