@@ -15,7 +15,6 @@ consumes:
 produces:
 - application/json 
 paths:
-  
   /students:
     post:
       tags: 
@@ -53,6 +52,23 @@ paths:
           description: Resources not found
         200:
           description: Successful response
+    put:
+      summary: Update an assignment
+      operationId: updateAssignment
+      parameters:
+        - name: Name
+          in: query
+          description: name of assignment
+          type: string
+          x-example: "Compito Gennaio"
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+          
   
   /assignment:
     post: 
