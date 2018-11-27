@@ -3,6 +3,7 @@
 30 ottobre 2018
 Membri:
 
+
 Andrea D'Incà<br>
 Federico Rodigari<br> 
 Giulio Mattolin<br> 
