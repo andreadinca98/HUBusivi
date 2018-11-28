@@ -5,6 +5,4 @@ router.get('/teacher', (req,res) =>{
     res.send("prova teacher")
 })
 
-
-
 module.exports = router
