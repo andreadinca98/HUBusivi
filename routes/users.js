@@ -2,12 +2,11 @@ const express = require('express');
 const User   = require('../models/user');
 const usersRoutes = express.Router(); 
 
-usersRoutes.route('/')
-.get(async function(req, res) {
+usersRoutes.get('/user', async function(req, res) {	
 	let users = await User.find({});
 	res.json(users);
 })
-.post(async function (req, res) {
+usersRoutes.post('/user', async function (req, res) {
 	var user = new User();
 	user.name = req.body.name;
 	user.password = req.body.password;
@@ -18,21 +17,20 @@ usersRoutes.route('/')
 	res.json(saved)
 })
 
-usersRoutes.route('/:user_id')
-.get(async function(req, res) {
+usersRoutes.get('/:user_id', async function(req, res) {
 	let user_id = req.params.user_id
 	if ( user_id == 'me' )
 		user_id = req.user.id
 	let user = await User.findOne( { id: user_id } );
 	res.json(user);
 })
-.delete(function (req, res) {
+usersRoutes.delete('/:user_id',function (req, res) {
 	if( User.remove({ id: req.params.user_id }) )
 		res.json({ message: 'Successfully deleted' });
 	else
 		res.json({ message: 'invalid id' });
 })
-.put(  
+usersRoutes.put('/:user_id',  
     async function(req, res) {
 	let user = await User.findOrCreate( { id: req.params.user_id } );
 	// update info

@@ -1,9 +1,11 @@
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
+const bodyParser = require('body-parser');
+const config = require('./config'); // get our config file
 const morgan = require('morgan')
-const User   = require('./models/user')
 
+const User   = require('./models/user')
 const routerUsers = require('./routes/users.js')
 const routerTeacher = require('./routes/teacher.js')
 const routerAssignment = require('./routes/assignment.js')
@@ -15,23 +17,34 @@ const routerCourses = require('./routes/courses.js')
 app.use(morgan('short'))
 
 //inserimento nome in una classe User
+var pippo = User.findOrCreate({
+    name: 'pippo', 
+    password: 'baudo',
+    admin: true 
+  });
 var nick = User.findOrCreate({
     name: 'nick', 
     password: 'nick',
     admin: true 
   });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// secret variable
+app.set('superSecret', config.secret);
  
-//vari routers alle varie pagine  
+//quello che fa nella pagina localhost:3000 -> Hello World!
+app.get('/', (req, res) => res.send('Hello World!'))
+app.listen(PORT, () => console.log('Example app listening on port: ' + PORT))
+
+//vari routers alle varie pagine 
+app.use(routerTeacher)
+app.use(routerCourses)
 app.use(routerMarks)
 app.use(routerExam)
 app.use(routerAssignment)
 app.use(routerUsers)
-app.use(routerTeacher)
-app.use(routerCourses)
-
-//quello che fa nella pagina localhost:3000 -> Hello World!
-app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(PORT, () => console.log('Wxample app listening on port' + PORT))
 
 //ERRORI: se non è stato fatto nulla di quello sopra allora darà un errore
 app.use((req,res,next)=>{
