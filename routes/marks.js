@@ -1,10 +1,9 @@
-//andrea
 const express = require('express')
 const router = express.Router();
 
 //
-router.get('/assignment', (req,res) =>{
-    res.send("prova assignment")
+router.get('/marks', (req,res) =>{
+    res.send("prova marks")
 })
 
 
