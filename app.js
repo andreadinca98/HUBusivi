@@ -20,9 +20,5 @@ app.use(routerMarks)
 const routerCourses = require('./routes/courses.js')
 app.use(routerCourses)
 
-
-
-
-
 app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(PORT, () => console.log('Wxample app listening on port' + PORT))
