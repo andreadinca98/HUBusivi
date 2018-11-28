@@ -1,6 +1,12 @@
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://ad98:'+process.env.MONGO_ATLAS_PW+'@cluster0-shard-00-00-',{
+    useMongoClient: true
+})
+
 
 const routerUser = require('./routes/users.js');
 app.use(routerUser)
