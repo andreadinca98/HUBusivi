@@ -1,7 +1,16 @@
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
+<<<<<<< HEAD
 const morgan = require('morgan')
+=======
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://ad98:'+process.env.MONGO_ATLAS_PW+'@cluster0-shard-00-00-',{
+    useMongoClient: true
+})
+
+>>>>>>> 3352de41b550f09917d84a30bd44b894bfbcca5e
 
 app.use(morgan('short'))
 
