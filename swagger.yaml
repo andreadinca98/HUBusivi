@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   version: '1.0'
   title: "HUBusivi"
-  description: REST Api per gestire gli esami
+  description: REST Api to manage the exams
   license:
     name: MIT
     url: https://github.com/apiaryio/polls-api/blob/master/LICENSE
@@ -20,14 +20,46 @@ paths:
     post:
       tags: 
       - "Users"
-      summary: Add a student on the database
+      description: Adds a student on the database
       operationId: addStudent
       parameters:
-        - name: student_attributes
+        - name: badge number
+          in: query
+          description: badge number of student
+          type: integer
+          x-exaple: 128888
+        - name: email
           in: query
           description: data of the student
           type: string
-          x-example: "Pinco pallino"
+          x-example: "Pincopallino@gmail.com"
+        - name: firstname
+          in: query
+          description: name of student
+          type: string
+          x-example: "Pinco"
+        - name: lastname
+          in: query
+          description: lastname of student
+          type: string
+          x-example: "Pallino"
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+    
+    get:
+      description: Returns a student from the database by ID
+      operationId: getStudent
+      parameters:
+        - name: badge number
+          in: query
+          description: badge number of student
+          type: integer
+          x-example: 198888
       responses:
         400:
           description: Bad request
@@ -36,16 +68,119 @@ paths:
         200:
           description: Successful response
   
-  /students/matricola:
-    delete:
-      summary: Remove a student from the database
-      operationId: addStudent
+  /students/BadgeNumber:
+    put:
+      description: Updates an assignment
+      operationId: updateAssignment
       parameters:
-        - name: matricola
+        - name: Name
           in: query
-          description: Matricola of the student that I want delete
+          description: name of assignment
           type: string
-          x-example: "Pinco pallino"
+          x-example: "Compito Gennaio"
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+     
+    delete:
+      description: Removes a student from the database
+      operationId: RemoveStudent
+      parameters:
+        - name: badge_number
+          in: query
+          description: Badge number of student that I want to delete
+          type: integer
+          x-example: 1
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+  
+  /teacher:
+    post:
+      tags:
+      - "Teacher"
+      description: Adds a teacher
+      operationId: AddAssignment
+      parameters:
+        - name: ID
+          in: query
+          description: ID of teacher
+          type: integer
+          x-exaple: 128888
+        - name: email
+          in: query
+          description: email of the teacher
+          type: string
+          x-example: "prof@gmail.com"
+        - name: firstname
+          in: query
+          description: name of teacher
+          type: string
+          x-example: "Giorgio"
+        - name: lastname
+          in: query
+          description: lastname of teacher
+          type: string
+          x-example: "Pallino"
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+    get:
+      description: Returns a teacher from the database by ID
+      operationId: getTeacher
+      parameters:
+        - name: ID
+          in: query
+          description: ID of teacher
+          type: integer
+          x-example: 198888
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+    
+  /teacher/teacherID:
+    get:
+        description: Returns a teacher from the database by ID
+        operationId: getTeacher
+        parameters:
+          - name: teacherID
+            in: query
+            description: teacher ID
+            type: integer
+            x-example: 1
+        responses:
+          400:
+            description: Bad request
+          404:
+            description: Resources not found
+          200:
+            description: Successful response
+    
+    delete:
+      description: Removes a teacher from the database
+      operationId: RemoveTeacher
+      parameters:
+        - name: ID
+          in: query
+          description: ID of teacher that I want to delete
+          type: integer
+          x-example: 1
       responses:
         400:
           description: Bad request
@@ -58,8 +193,7 @@ paths:
     post: 
         tags: 
         - "Assignment"
-        
-        summary: Add an Assignment(only teacher)
+        description: Adds an Assignment(only teacher)
         operationId: AddAssignment
         parameters:
           - name: Name 
@@ -82,7 +216,6 @@ paths:
             description: Text of the assignment
             type: string
             x-example: "Voglio un programma in javascript che faccia..."
-          
         responses:
           400:
             description: Bad request
@@ -93,28 +226,14 @@ paths:
 
   /assignment/assignmentId:  
     delete:
-      summary: Remove an assignment
+      description: Removes an assignment
       operationId: removeAssignment
       parameters:
-        - name: Name
+        - name: assignmentId
           in: query
           description: name of assignment
           type: string
-          x-example: "Compito Gennaio"
-        - name: Date
-          in: query
-          description: Date of assignment
-          type: string
-          x-example: "11/11/2018"
-        - name: Delivery date
-          in: query
-          description: Delivery date of assignment
-          type: string
-          x-example: "12/12/2018"
-        - name: assignmentId
-          in: query
-          type: integer
-          x-example: "113425"
+          x-example: "124354"
       responses:
         400:
           description: Bad request
@@ -124,7 +243,7 @@ paths:
           description: Successful response  
   
     put:
-      summary: Update an assignment
+      description: Updates an assignment
       operationId: updateAssignment
       parameters:
         - name: Name
@@ -140,12 +259,66 @@ paths:
         200:
           description: Successful response
           
+  /exam:
+    post:
+      tags: 
+      - "Exam"
+      description: Adds a exam on the database
+      operationId: addExam
+      parameters:
+        - name: Name
+          in: query
+          description: name of the exam
+          type: string
+          x-example: "Pinco pallino"
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+
+  /exam/examId:  
+    delete:
+      description: Removes an exam
+      operationId: removeExam
+      parameters:
+      - name: examId
+        in: query
+        description: id of the exam
+        type: integer
+        x-example: 312422
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response  
+  
+    put:
+      description: Updates an exam
+      operationId: updateExam
+      parameters:
+        - name: examId
+          in: query
+          description: id of the exam
+          type: string
+          x-example: "156785"
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+          
   /marks:
-    
     post:
       tags:
       - "Marks"
-      summary: Add a Mark (only teacher)
+      description: Adds a Mark (only teacher)
       operationId: addMark
       parameters:
         - name: mark
@@ -172,7 +345,7 @@ paths:
           description: Successful response
     
     delete:
-      summary: Remove a Mark of a specific exam of a student (only teacher)
+      description: Removes a Mark of a specific exam of a student (only teacher)
       operationId: removeMark
       parameters:
         - name: matricola
@@ -194,7 +367,7 @@ paths:
           description: Successful response
 
     put:
-      summary: Update a mark of a specific exam of a student (only teacher)
+      description: Updates a mark of a specific exam of a student (only teacher)
       operationId: updateMark
       parameters:
         - name: mark
@@ -219,9 +392,10 @@ paths:
           description: Resources not found
         200:
           description: Successful response
+  
   /marks/courseId:
     get:
-      summary: Get your marks of a specific course
+      description: Gets your marks of a specific course
       operationId: updateMark
       parameters:
         - name: mark
@@ -250,8 +424,7 @@ paths:
   /marks/avg:
     post:
       description: >-
-        Calculate the marks average about a specific exam of a course.
-      summary: Average course marks (only teacher)
+        Calculates the marks average about a specific exam of a course(only teacher).
       operationId: addMark
       parameters:
         - name: course_id
@@ -270,7 +443,7 @@ paths:
   
   /courses:
     put:
-      summary: Add a course(teacher)/Join a course(student)
+      description: Adds a course(teacher)/Join a course(student)
       operationId: addCourse
       parameters:
         - name: course data
@@ -289,7 +462,7 @@ paths:
     get:
       tags:
       - "Courses"
-      summary: Get the list of all your courses
+      description: Gets the list of all your courses
       operationId: coursesList
       parameters:
         - name: matricola
@@ -308,7 +481,7 @@ paths:
 
   /courses/courseId:  
     delete:
-      summary: Remove a course(teacher only)/Leave a course(student only)
+      description: Removes a course(teacher only)/Leave a course(student only)
       operationId: removeCourse
       parameters:
         - name: course_id
@@ -324,8 +497,8 @@ paths:
         200:
           description: Successful response
   
-    post:
-      summary: Update a Course(teacher only)
+    put:
+      description: Updates a Course(teacher only)
       operationId: updateMark
       parameters:
         - name: course info
