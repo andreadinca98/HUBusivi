@@ -4,7 +4,7 @@
   "description": "<b>Data di inizio del progetto:</b>",
   "main": "api.js",
   "scripts": {
-    "start": "node api.js",
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,11 +19,11 @@
   "homepage": "https://github.com/andreadinca98/ProgettoIS2#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.4",
-    "morgan": "^1.9.1"
+    "express": "^4.16.4"
   },
   "devDependencies": {
     "mongoose": "^5.3.14",
+    "morgan": "^1.9.1",
     "nodemon": "^1.18.7"
   }
 }

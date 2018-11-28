@@ -6,8 +6,8 @@ const morgan = require('morgan')
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://ad98:'+process.env.MONGO_ATLAS_PW+'@cluster0-shard-00-00-',{
-    useMongoClient: true
+mongoose.connect('mongodb://ad98:'+process.env.MONGO_ATLAS_PW+'@cluster0-shard-00-00-znlmo.mongodb.net:27017,cluster0-shard-00-01-znlmo.mongodb.net:27017,cluster0-shard-00-02-znlmo.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',{
+    useNewUrlParser: true
 })
 
 app.use(morgan('short'))
