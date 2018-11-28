@@ -20,6 +20,8 @@ app.use(routerUser)
 app.use(routerTeacher)
 app.use(routerCourses)
 
+app.get('/', (req, res) => res.send('Hello World!'))
+app.listen(PORT, () => console.log('Wxample app listening on port' + PORT))
 
 app.use((req,res,next)=>{
     const error = new Error('Page not found')
@@ -28,13 +30,10 @@ app.use((req,res,next)=>{
 })
 
 app.use((error,req,res,next)=>{
-    res.status(err.status || 500)
+    res.status(error.status || 500)
     res.json({
         error: {
             message: error.message
         }
     })
 })
-
-app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(PORT, () => console.log('Wxample app listening on port' + PORT))
