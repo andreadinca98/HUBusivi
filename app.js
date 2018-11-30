@@ -1,14 +1,12 @@
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
-
-app.use(express.static('./public'))
-
+const bodyParser = require('body-parser');
+const config = require('/config.js'); // get our config file
 const morgan = require('morgan')
 
-app.use(morgan('short'))
-
-const routerUser = require('./routes/users.js');
+const User   = require('./models/user')
+const routerUsers = require('./routes/users.js')
 const routerTeacher = require('./routes/teacher.js')
 const routerAssignment = require('./routes/assignment.js')
 const routerExam = require('./routes/exam.js')
@@ -48,8 +46,6 @@ app.use(routerExam)
 app.use(routerAssignment)
 app.use(routerUser)
 
-app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(PORT, () => console.log('Example app listening on port' + PORT))
 
 //ERRORI: se non è stato fatto nulla di quello sopra allora darà un errore
 app.use((req,res,next)=>{

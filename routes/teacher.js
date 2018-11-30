@@ -3,7 +3,7 @@ const express = require('express')
 const Teacher = require('../models/teacher')
 const teacherRoutes = express.Router();
 
-teacherRoutes.get('/teacher', asyinc function(req,res) =>{
+teacherRoutes.get('/teacher', async function(req,res) {
     let teachers = await Teacher.find({});
     res.json(teachers);
 })
