@@ -38,7 +38,7 @@ app.use(routerCourses)
 app.use(routerMarks)
 app.use(routerExam)
 app.use(routerAssignment)
-app.use(routerStudent);
+app.use('/students',routerStudent);
 
 //ERRORI: se non è stato fatto nulla di quello sopra allora darà un errore
 app.use((req,res,next)=>{
