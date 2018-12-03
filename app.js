@@ -28,8 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //quello che fa nella pagina localhost:3000 -> Hello World!
-app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(PORT, () => console.log('Example app listening on port: ' + PORT))
+
 
 //vari routers alle varie pagine 
 app.use(routerTeacher)
