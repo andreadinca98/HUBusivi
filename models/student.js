@@ -1,11 +1,22 @@
-//STUDENT??
+//STUDENT
+const mongoose = require('mongoose');
+
+const studentSchema = mongoose.Schema({
+	_id: mongoose.Schema.Types.ObjectId,
+	name: String
+})
+
+module.exports = mongoose.model('Student', studentSchema);
+
+
+/*
 var uniqid = require('uniqid');     //se chiamato restituisce id univoco
 
 var usersTable = global.usersTable  
 if ( usersTable == null )
 	usersTable = [];    //array vuoto
 
-class User {
+class Student {
 
 	async save() {
 		let matchingUserId = -1;
@@ -14,8 +25,8 @@ class User {
 			this.id = uniqid();
 		}
 		else {
-            /*  3 uguali -> esattamente uguale a ...
-                restituisce l'index della tabella dove andiamo ad inserire gli user, "e" non so a cosa si riferisce */
+            //  3 uguali -> esattamente uguale a ...
+            //    restituisce l'index della tabella dove andiamo ad inserire gli user, "e" non so a cosa si riferisce
             matchingUserId = usersTable.findIndex(e => e.id === this.id)   
 		}
 
@@ -79,7 +90,8 @@ class User {
 	}
 };
 
-module.exports = User;
+module.exports = Student;
+*/
 
 
 

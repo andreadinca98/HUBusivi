@@ -19,20 +19,20 @@ teacherRoutes.post('/teacher', async function (req, res) {
 	res.json(saved)
 })
 
-teacherRoutes.get('/:teacher_id', async function(req, res) {
+teacherRoutes.get('teacher/:teacher_id', async function(req, res) {
 	let teacher_id = req.params.user_id
 	if ( teacher_id == 'me' )
 		teacher_id = req.user.id
 	let teacher = await Teacher.findOne( { id: teacher_id } );
 	res.json(teacher);
 })
-teacherRoutes.delete('/:teacher_id',function (req, res) {
+teacherRoutes.delete('teacher/:teacher_id',function (req, res) {
 	if( Teacher.remove({ id: req.params.teacher_id }) )
 		res.json({ message: 'Successfully deleted' });
 	else
 		res.json({ message: 'invalid id' });
 })
-teacherRoutes.put('/:teacher_id',  
+teacherRoutes.put('teacher/:teacher_id',  
     async function(req, res) {
 	let teacher = await Teacher.findOrCreate( { id: req.params.teacher_id } );
 	// update info
@@ -41,5 +41,5 @@ teacherRoutes.put('/:teacher_id',
 	teacher.admin = req.body.admin;
 })
 
-module.exports = teacherRoutes;
+module.exports = teacherRoutes
 
