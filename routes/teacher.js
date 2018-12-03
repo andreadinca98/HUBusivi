@@ -1,45 +1,87 @@
 //fede
 const express = require('express')
 const Teacher = require('../models/teacher')
+const mongoose = require('mongoose');
 const teacherRoutes = express.Router();
 
-teacherRoutes.get('/teacher', async function(req,res) {
-    let teachers = await Teacher.find({});
-    res.json(teachers);
-})
-//prova
-teacherRoutes.post('/teacher', async function (req, res) {
-	var teacher = new Teacher();
-	teacher.name = req.body.name;
-	teacher.password = req.body.password;
-	teacher.admin = req.body.admin;
+teacherRoutes.get('/', (req,res,next) =>{
+	Teacher
+	.find()
+	.exec()
+	.then(docs => {
+		console.log(docs);
+		res.status(200).json(docs);
+	})
+	.catch(err => {
+		console.log(err);
+		res.status(500).json({
+			message: 'Handling GET requests to /teacher',
+			error: err
+		});
+	});
+});
+//Inserisci studente nel DB, andare in body di Postman 
+//e aggiungere in linguaggio JSON email,nome e cognome
+teacherRoutes.post('/', function (req, res) ({
+	const teacher = new Teacher({
+		_id : new mongoose.Types.ObjectId(),
+		name : req.body.name
+});
 
-	// save the bear and check for errors
-	saved = await teacher.save()
-	res.json(saved)
+//.save mette tutto nel DB
+teacher
+.save()
+.then(result => {			
+	console.log(result);
+	res.status(201).json({
+		message: 'Handling POST requests to /teacher',
+		createTeacher: result
+	});
 })
+.catch(err => {
+	res.status(500).json({
+		message: "Docente non inserito",
+		error: err
+	});	
+});
+});
 
-teacherRoutes.get('teacher/:teacher_id', async function(req, res) {
-	let teacher_id = req.params.user_id
-	if ( teacher_id == 'me' )
-		teacher_id = req.user.id
-	let teacher = await Teacher.findOne( { id: teacher_id } );
-	res.json(teacher);
+//Restituisce gli studenti con quelli ID
+usersRoutes.get('/:teachersId', (req,res,next) => {	
+const id = req.params.teachersId;
+Teacher.findById(id)
+.exec()
+.then(doc => {		
+	console.log(doc),		
+	res.status(200).json(doc)
 })
-teacherRoutes.delete('teacher/:teacher_id',function (req, res) {
-	if( Teacher.remove({ id: req.params.teacher_id }) )
-		res.json({ message: 'Successfully deleted' });
-	else
-		res.json({ message: 'invalid id' });
-})
-teacherRoutes.put('teacher/:teacher_id',  
-    async function(req, res) {
-	let teacher = await Teacher.findOrCreate( { id: req.params.teacher_id } );
-	// update info
-	teacher.name = req.body.name || teacher.name;
-	teacher.password = req.body.password || teacher.password;
-	teacher.admin = req.body.admin;
-})
+.catch(err => {
+	console.log(err);
+	res.status(500).json({
+		message: "Non è stato trovato il docente",
+		error: err
+	});
+});
 
-module.exports = teacherRoutes
+});
+
+//delete
+usersRoutes.delete('/:teachersId', (req,res,next) => {
+const id = req.params.studentsId;
+Teacher.remove({_id: id})
+.exec()
+.then(result => {
+	res.status(200).json(result);
+})
+.catch(err => {
+	console.log(err);
+	res.status(500).json({
+		message: "Docente rimosso",
+		error: err
+	})
+});
+
+});
+
+module.exports = teachersRoutes
 
