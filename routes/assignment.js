@@ -23,16 +23,7 @@ router.get('/assignment', (req,res) =>{
             error: err
         })
     })
-    /*var results
-    const queryString = "SELECT * FROM assignments INNER JOIN users ON assignments.matricola = users.matricola WHERE matricola = ?"
-    connection.query(queryString,[matricola],(err, rows, fields) =>{
-        if(err){
-            console.log("Failed to query for users: " + err )
-            res.sendStatus(500)
-            return
-        }
-        results = res.rows()
-    })*/
+    
 })
 
 router.post('/assignment_create', (req,res) =>{
