@@ -15,7 +15,7 @@ usersRoutes.get('/', (req,res,next) => {
 	.catch(err => {
 		console.log(err);
 		res.status(500).json({
-			message: 'Handling GET requests to /student',
+			message: 'Errore in /students GET',
 			error: err
 		});
 	});
@@ -27,7 +27,8 @@ usersRoutes.post('/', function (req, res) {
 
 	const student = new Student({
 		_id : new mongoose.Types.ObjectId(),
-		name : req.body.name				
+		email : req.body.email,
+		corso: req.body.corso				
 	});
 	
 	//.save mette tutto nel DB
@@ -64,7 +65,14 @@ usersRoutes.get('/:studentsId', (req,res,next) => {
 			error: err
 		});
 	});
+});
 
+//Restituisce gli studenti con quelli ID
+usersRoutes.get('/:corso', (req,res,next) => {	
+	const corso_nome = req.params.corso_nome;
+	Student.array.forEach(element => {
+		console.log(element)
+	});
 });
 
 //delete
@@ -86,53 +94,3 @@ usersRoutes.delete('/:studentsId', (req,res,next) => {
 });
 
 module.exports = usersRoutes;
-
-
-/* 
-const express = require('express');
-const User   = require('../models/student.js');
-const usersRoutes = express.Router(); 
-
-usersRoutes.get('/user', async function(req, res) {	
-	let users = await User.find({});
-	res.json(users);
-})
-
-usersRoutes.post('/user', async function (req, res) {
-	var user = new User();
-	user.name = req.body.name;
-	user.password = req.body.password;
-	user.admin = req.body.admin;
-
-	// save the bear and check for errors
-	saved = await user.save()
-	res.json(saved)
-})
-
-usersRoutes.get('/user/:id ', async function(req, res) {
-	console.log("Lala" + req.param.id)
-	/*
-	let user_id = req.params.user_id
-	if ( user_id == 'me' )
-		user_id = req.user.id
-	let user = await User.findOne( { id: user_id } );
-	res.json(user);
-})
-
-usersRoutes.delete('/user/:user_id',function (req, res) {
-	if( User.remove({ id: req.params.user_id }) )
-		res.json({ message: 'Successfully deleted' });
-	else
-		res.json({ message: 'invalid id' });
-})
-usersRoutes.put('/user/:user_id',  
-    async function(req, res) {
-	let user = await User.findOrCreate( { id: req.params.user_id } );
-	// update info
-	user.name = req.body.name || user.name;
-	user.password = req.body.password || user.password;
-	user.admin = req.body.admin;
-})
-
-
-module.exports = usersRoutes; */
