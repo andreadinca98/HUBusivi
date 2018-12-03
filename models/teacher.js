@@ -1,4 +1,15 @@
-var uniqid = require('uniqid');     //se chiamato restituisce id univoco
+//TEACHER
+const mongoose = require('mongoose');
+
+const teacherSchema = mongoose.Schema({
+	_id: mongoose.Schema.Types.ObjectId,
+	name: String
+})
+
+module.exports = mongoose.model('Teacher', teacherSchema);
+
+
+/*var uniqid = require('uniqid');     //se chiamato restituisce id univoco
 
 var teachersTable = global.teachersTable  
 if ( teachersTable == null )
@@ -14,7 +25,7 @@ class Teacher {
 		}
 		else {
             /*  3 uguali -> esattamente uguale a ...
-                restituisce l'index della tabella dove andiamo ad inserire gli Teacher, "e" non so a cosa si riferisce */
+                restituisce l'index della tabella dove andiamo ad inserire gli Teacher, "e" non so a cosa si riferisce 
             matchingTeacherId = teachersTable.findIndex(e => e.id === this.id)   
 		}
 
@@ -79,6 +90,6 @@ class Teacher {
 };
 
 module.exports = Teacher;
-
+*/
 
 

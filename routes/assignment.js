@@ -45,7 +45,7 @@ router.post('/assignment_create', (req,res) =>{
         uploaddata:today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate()
     })
 
-    Assignment
+    assignment
     .save()
     .then(result => {
         console.log(result)
@@ -82,6 +82,22 @@ router.get('/:assignmentId',(req,res,next) =>{
 })
 
 
+router.delete('/assignment/:assignmentId', (req,res) =>{
+    const id = req.params.assignmentId;
+    Assignment
+    .remove({_id: id})
+	.exec()
+	.then(result => {
+		res.status(200).json(result);
+	})
+	.catch(err => {
+		console.log(err);
+		res.status(500).json({
+			message: "Assignment non rimosso",
+			error: err
+		})
+	});
+})
 
 /*router.update('/assignment/:assignmentId', (req,res) =>{
     const connection = mysql.createConnection({
