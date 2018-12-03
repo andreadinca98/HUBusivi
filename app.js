@@ -19,24 +19,7 @@ const routerMarks = require('./routes/marks.js')
 const routerCourses = require('./routes/courses.js')
 
 //connessione al DB MongoD
-<<<<<<< HEAD
-mongoose.connect("mongodb://stefanopretto:hubisivi_2018@cluster0-shard-00-00-gmemg.mongodb.net:27017,cluster0-shard-00-01-gmemg.mongodb.net:27017,cluster0-shard-00-02-gmemg.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true", { useNewUrlParser: true });
-
-// var promise = Promise.resolve().then(function(){
-//     console.log('rejection');
-//     throw new Error('Failed');
-// });
-// promise.catch(err => {
-//     console.log(err);
-//     res.status(500).json({
-//         message: "Assignment non rimosso",
-//         error: err
-//     })
-// });
-// promise['catch'](function(){console.log('caught')});
-=======
 mongoose.connect("mongodb://stefanopretto:hubusivi_2018@cluster0-shard-00-00-gmemg.mongodb.net:27017,cluster0-shard-00-01-gmemg.mongodb.net:27017,cluster0-shard-00-02-gmemg.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true", { useNewUrlParser: true });
->>>>>>> 889e6cf6220594379d6e7eb8623e97da32b88f74
 
 //permette di vedere nel terminale la risposta in breve della pagina e vari errori
 app.use(morgan('dev'));
@@ -44,7 +27,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //quello che fa nella pagina localhost:3000 -> Hello World!
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/',(req,res) => {
+    window
+})
+app.get('/', (req, res) => window.location.href = "./public/login.html")
 app.listen(PORT, () => console.log('Example app listening on port: ' + PORT))
 
 //vari routers alle varie pagine 

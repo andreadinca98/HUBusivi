@@ -8,22 +8,18 @@ const Assignment = require('../models/assignment.js')
 app.use(bodyParser.urlencoded({extended: false}))
 
 //
-router.get('/assignment', (req,res) =>{
-    Assignment
-    .findAll()
-    .exec()
-    .then(docs => {
-        console.log(docs);
-        res.status(200).json(docs);
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json({
-            message: 'Handling GET requests to /assignment',
-            error: err
-        })
-    })
-    
+router.get('/assignment/:studentId', (req,res) =>{
+    console.log('Getting assignment')
+    assignment.findAll(req.params.studentId)
+    .exec(function(err, assignment){
+        if(err){
+            res.end('Error has occured')
+        }
+        else{
+            console.log('List of courses')
+            res.json(assignment)
+			}
+		})
 })
 
 router.post('/assignment_create', (req,res) =>{
@@ -56,7 +52,7 @@ router.post('/assignment_create', (req,res) =>{
 router.get('/:assignmentId',(req,res,next) =>{
     const id = req.params.assignmentId;
     Assignment
-    .findById(id)
+    .findOne({_id: id})
 	.exec()
 	.then(doc => {		
 		console.log(doc),		
@@ -123,6 +119,5 @@ router.delete('/assignment/:assignmentId', (req,res) =>{
         })
     }
 })*/
-
 
 module.exports = router
