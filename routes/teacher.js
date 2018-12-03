@@ -41,5 +41,5 @@ teacherRoutes.put('/:teacher_id',
 	teacher.admin = req.body.admin;
 })
 
-module.exports = router
+module.exports = teacherRoutes;
 
