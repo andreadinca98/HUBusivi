@@ -2,11 +2,10 @@ const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
 const bodyParser = require('body-parser');
-//const config = require('./config.js'); // get our config file
 const morgan = require('morgan')
 const mongoose = require('mongoose');
-app.use(express.static('./public'))
 
+app.use(express.static('./public'))
 
 const routerStudent = require('./routes/students.js')
 const routerTeacher = require('./routes/teachers.js')
