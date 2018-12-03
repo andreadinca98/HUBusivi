@@ -22,11 +22,11 @@
     "express": "^4.16.4",
     "morgan": "^1.9.1",
     "mysql": "^2.16.0",
-    "nodemon": "^1.18.7",
     "uniqid": "^5.0.3"
   },
   "devDependencies": {
     "mongoose": "^5.3.14",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.7"
   }
 }
