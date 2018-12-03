@@ -22,12 +22,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //inserimento nome in una classe Teacher
+/*
 var prof1 = Teacher.findOrCreate({
     name: 'prof', 
     password: 'baudo',
     admin: true 
   });
- 
+ */
 //quello che fa nella pagina localhost:3000 -> Hello World!
 app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(PORT, () => console.log('Example app listening on port: ' + PORT))
