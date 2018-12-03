@@ -10,7 +10,13 @@ app.use(bodyParser.urlencoded({extended: false}))
 //
 router.get('/assignment/:studentId', (req,res) =>{
     console.log('Getting assignment')
-    assignment.findAll(req.params.studentId)
+    Assignment.find()
+    .exec(function(err, courses){
+        
+    }
+    
+    )
+    assignment.findOne(req.params.studentId)
     .exec(function(err, assignment){
         if(err){
             res.end('Error has occured')

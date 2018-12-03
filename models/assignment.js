@@ -1,4 +1,16 @@
-var uniqid = require('uniqid');     //se chiamato restituisce id univoco
+//ASSIGNMENT
+const mongoose = require('mongoose');
+
+const assignmentSchema = mongoose.Schema({
+	_id: mongoose.Schema.Types.ObjectId,
+	text: { type:String, require: true},
+	expireData: { type:String, require: true},
+	text: { type:String, require: true}
+});
+
+module.exports = mongoose.model('Assignment', assignmentSchema);
+
+/*var uniqid = require('uniqid');     //se chiamato restituisce id univoco
 
 var assignmentTable = global.assignmentTable  
 if ( assignmentTable == null )
@@ -58,12 +70,12 @@ class Assignment {
 		return firstAssignment;
     }
     
-    static async findAll(criterias){
+    /*static async findAll(criterias){
         let matchingAssignment = dbo.filter(u => {
 			return criterias.AssignmentId == u.AssignmentId
 		});
 		return matchingAssignment;
-    }
+	}
 	// this returns a Promise as much as an async function
 	static findOrCreate(criterias) {
 		return this.findOne(criterias)
@@ -81,4 +93,5 @@ class Assignment {
 	}
 };
 
-module.exports = Assignment;
+module.exports = Assignment;*/
+
