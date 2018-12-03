@@ -20,7 +20,7 @@ const routerMarks = require('./routes/marks.js')
 const routerCourses = require('./routes/courses.js')
 
 //connessione al DB MongoD
-//mongoose.connect("mongodb+srv://stefanopretto:hubisivi_2018@cluster0-gmemg.mongodb.net/test?retryWrites=true", { useNewUrlParser: true });
+mongoose.connect("mongodb://stefanopretto:hubusivi_2018@cluster0-shard-00-00-gmemg.mongodb.net:27017,cluster0-shard-00-01-gmemg.mongodb.net:27017,cluster0-shard-00-02-gmemg.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true", { useNewUrlParser: true });
 
 //permette di vedere nel terminale la risposta in breve della pagina e vari errori
 app.use(morgan('dev'));

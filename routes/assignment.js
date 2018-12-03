@@ -3,7 +3,7 @@ const router = express.Router();
 const bodyParser = require('body-parser')
 const app = express()
 const mongoose = require('mongoose')
-const assignment = require('../models/assignment.js')
+const Assignment = require('../models/assignment.js')
 
 app.use(bodyParser.urlencoded({extended: false}))
 
@@ -81,22 +81,7 @@ router.get('/:assignmentId',(req,res,next) =>{
 
 })
 
-router.delete('/assignment/:assignmentId', (req,res) =>{
-    const id = req.params.assignmentId;
-    Student
-    .remove({_id: id})
-	.exec()
-	.then(result => {
-		res.status(200).json(result);
-	})
-	.catch(err => {
-		console.log(err);
-		res.status(500).json({
-			message: "Assignment non rimosso",
-			error: err
-		})
-	});
-})
+
 
 /*router.update('/assignment/:assignmentId', (req,res) =>{
     const connection = mysql.createConnection({
