@@ -2,18 +2,13 @@ const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
 const bodyParser = require('body-parser');
-//const config = require('./config.js'); // get our config file
 const morgan = require('morgan')
 const mongoose = require('mongoose');
+
 app.use(express.static('./public'))
 
-
-//const User = require('./models/user')
-//const routerUsers = require('./routes/users.js')
-
-
 const routerStudent = require('./routes/students.js')
-const routerTeacher = require('./routes/teacher.js')
+const routerTeacher = require('./routes/teachers.js')
 const routerAssignment = require('./routes/assignment.js')
 const routerExam = require('./routes/exam.js')
 const routerMarks = require('./routes/marks.js')
@@ -31,12 +26,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 //vari routers alle varie pagine 
-app.use(routerTeacher)
+app.use('/teachers',routerTeacher)
 app.use(routerCourses)
-app.use(routerMarks)
+app.use('/marks',routerMarks)
 app.use(routerExam)
-app.use(routerAssignment)
+
 app.use('/students',routerStudent);
+app.use(routerAssignment)
+
 
 //ERRORI: se non è stato fatto nulla di quello sopra allora darà un errore
 app.use((req,res,next)=>{

@@ -68,7 +68,7 @@ teachersRoutes.post('/', function (req, res) {
 
 	//delete
 	teachersRoutes.delete('/:teachersId', (req,res,next) => {
-		const id = req.params.studentsId;
+		const id = req.params.teachersId;
 		Teacher.remove({_id: id})
 		.exec()
 		.then(result => {
@@ -77,7 +77,7 @@ teachersRoutes.post('/', function (req, res) {
 		.catch(err => {
 			console.log(err);
 			res.status(500).json({
-				message: "Docente rimosso",
+				message: "Docente non rimosso",
 				error: err
 			})
 		});

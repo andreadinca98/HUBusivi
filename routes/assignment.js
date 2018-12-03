@@ -45,7 +45,7 @@ router.post('/assignment_create', (req,res) =>{
         uploaddata:today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate()
     })
 
-    Assignment
+    assignment
     .save()
     .then(result => {
         console.log(result)
@@ -80,6 +80,7 @@ router.get('/:assignmentId',(req,res,next) =>{
 	});
 
 })
+
 
 router.delete('/assignment/:assignmentId', (req,res) =>{
     const id = req.params.assignmentId;
