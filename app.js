@@ -11,7 +11,7 @@ app.use(express.static('./public'))
 //const User = require('./models/user')
 //const routerUsers = require('./routes/users.js')
 
-const Teacher = require('./models/teacher.js')
+
 const routerStudent = require('./routes/students.js')
 const routerTeacher = require('./routes/teacher.js')
 const routerAssignment = require('./routes/assignment.js')
@@ -32,7 +32,7 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(PORT, () => console.log('Example app listening on port: ' + PORT))
 
 //vari routers alle varie pagine 
-//app.use(routerTeacher)
+app.use(routerTeacher)
 app.use(routerCourses)
 app.use(routerMarks)
 app.use(routerExam)
