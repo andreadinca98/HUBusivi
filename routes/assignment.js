@@ -7,25 +7,44 @@ const Assignment = require('../models/assignment.js')
 
 app.use(bodyParser.urlencoded({extended: false}))
 
-//
-router.get('/assignment/:studentId', (req,res) =>{
-    console.log('Getting assignment')
+router.get('/assignment', function(req, res){
+	console.log('Getting assignments')
     Assignment.find()
     .exec(function(err, courses){
-        
-    }
-    
-    )
-    assignment.findOne(req.params.studentId)
-    .exec(function(err, assignment){
         if(err){
             res.end('Error has occured')
         }
         else{
             console.log('List of courses')
-            res.json(assignment)
+            res.json(courses)
 			}
 		})
+})
+
+router.get('/assignment/:studentId', (req,res) =>{
+    console.log('Getting assignment')
+    const sId = req.params.studentId;
+	    
+    Assignment.findOne({studentid: sId})
+    .exec(function(err, courses){
+        if(err){
+            res.end('Error has occured')
+        }
+        else{
+            console.log('List of courses')
+            res.json(courses)
+			}
+    })
+    .then(result => {
+		res.status(200).json(result);
+	})
+	.catch(err => {
+		console.log(err);
+		res.status(500).json({
+			message: "Errore lista assignment",
+			error: err
+		})
+	})
 })
 
 router.post('/assignment_create', (req,res) =>{
@@ -76,9 +95,8 @@ router.get('/:assignmentId',(req,res,next) =>{
 
 
 router.delete('/assignment/:assignmentId', (req,res) =>{
-    const id = req.params.assignmentId;
-    Assignment
-    .remove({_id: id})
+    const assignmentId = req.params.assignmentId
+	Assignment.deleteOne({_id: assignmentId})
 	.exec()
 	.then(result => {
 		res.status(200).json(result);
@@ -89,7 +107,8 @@ router.delete('/assignment/:assignmentId', (req,res) =>{
 			message: "Assignment non rimosso",
 			error: err
 		})
-	});
+	})
+	
 })
 
 /*router.update('/assignment/:assignmentId', (req,res) =>{
