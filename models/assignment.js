@@ -1,4 +1,17 @@
-var uniqid = require('uniqid');     //se chiamato restituisce id univoco
+//ASSIGNMENT
+const mongoose = require('mongoose');
+
+const assignmentSchema = mongoose.Schema({
+	id: mongoose.Schema.Types.ObjectId,
+	text: { type:String, require: true},
+	expireData: { type:String, require: true},
+	uploadData: { type:String, require: true},
+	studentId: {type: String, require: true}
+});
+
+module.exports = mongoose.model('Assignment', assignmentSchema);
+
+/*var uniqid = require('uniqid');     //se chiamato restituisce id univoco
 
 var assignmentTable = global.assignmentTable  
 if ( assignmentTable == null )
@@ -54,33 +67,16 @@ class Assignment {
 
 	static async findOne(criterias) {
 		let assignment = await this.find(criterias)
-		let firstAssignment = teachers.length==0 ? null : teachers[0]
+		let firstAssignment = assignment.length==0 ? null : assignments[0]
 		return firstAssignment;
     }
     
-    static async findAll(criterias){
-        var dbo = db.db("mydb");
-        dbo.collection('assignment').aggregate([
-          { $lookup:
-             {
-               from: 'users',
-               localField: 'matricola',
-               foreignField: 'matricola',
-               as: 'matricola'
-             }
-           }
-          ]).toArray(function(err, res) {
-          if (err) throw err;
-          console.log(JSON.stringify(res));
-          db.close();
-        })
-        //da chiedere SELECT WHERE
+    /*static async findAll(criterias){
         let matchingAssignment = dbo.filter(u => {
-			return criterias.matricola == undefined ? true : u.name === criterias.name
-			&&     criterias.id == undefined ? true : u.id === criterias.id
+			return criterias.AssignmentId == u.AssignmentId
 		});
 		return matchingAssignment;
-    }
+	}
 	// this returns a Promise as much as an async function
 	static findOrCreate(criterias) {
 		return this.findOne(criterias)
@@ -98,7 +94,5 @@ class Assignment {
 	}
 };
 
-module.exports = Assignment;
-
-
+module.exports = Assignment;*/
 
