@@ -1,3 +1,5 @@
 language: node_js
+before_script:
+  - npm install --save-dev s'8'
 node_js:
   - s'8'
