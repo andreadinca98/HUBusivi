@@ -1,4 +1,4 @@
 language: node_js
-rvm install s8
+rvm install s'8'
 node_js:
   - s'8'
