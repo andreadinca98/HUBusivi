@@ -45,7 +45,7 @@ router.post('/assignment_create', (req,res) =>{
         uploaddata:today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate()
     })
 
-    Assignment
+    assignment
     .save()
     .then(result => {
         console.log(result)

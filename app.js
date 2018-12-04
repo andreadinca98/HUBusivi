@@ -36,7 +36,7 @@ app.listen(PORT, () => console.log('Example app listening on port: ' + PORT))
 app.use(routerCourses)
 app.use(routerMarks)
 app.use(routerExam)
-app.use(routerAssignment)
+//app.use(routerAssignment)
 app.use('/students',routerStudent);
 
 //ERRORI: se non è stato fatto nulla di quello sopra allora darà un errore
