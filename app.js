@@ -10,7 +10,6 @@ app.use(express.static('./public'))
 const routerStudent = require('./routes/students.js')
 const routerTeacher = require('./routes/teachers.js')
 const routerAssignment = require('./routes/assignment.js')
-const routerExam = require('./routes/exam.js')
 const routerMarks = require('./routes/marks.js')
 const routerCourses = require('./routes/courses.js')
 
@@ -33,7 +32,6 @@ app.listen(PORT, () => console.log('Example app listening on port: ' + PORT))
 app.use('/teachers',routerTeacher)
 app.use(routerCourses)
 app.use('/marks',routerMarks)
-app.use(routerExam)
 
 app.use('/students',routerStudent);
 app.use(routerAssignment)
