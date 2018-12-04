@@ -22,10 +22,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //quello che fa nella pagina localhost:3000 -> Hello World!
-app.get('/',(req,res) => {
+/*app.get('/',(req,res) => {
     window
+})*/
+app.get('/', (req, res) => {
+    window.location.href = "./public/login.html"
 })
-app.get('/', (req, res) => window.location.href = "./public/login.html")
 app.listen(PORT, () => console.log('Example app listening on port: ' + PORT))
 
 //vari routers alle varie pagine 
@@ -57,4 +59,19 @@ app.use((error,req,res,next)=>{
             message: error.message
         }
     })
+})
+
+app.get('/checkLogin',function(req, res){
+    const tipo = req.body.type.getValue
+    const a = document.getElementsByName('type')
+    console.log(a)
+    const nome = req.body.name
+    const pass = req.body.password
+    /*if(tipo == 'student'){
+        console.log('s')     
+    }
+    if(tipo == 'teacher'){
+        console.log('t')
+    }*/
+
 })
