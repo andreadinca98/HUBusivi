@@ -36,6 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => res.send())
 app.listen(PORT, () => console.log('Example app listening on port: ' + PORT))
 
+
 //vari routers alle varie pagine 
 app.use('/teachers',routerTeacher)
 app.use('/courses',routerCourses)
