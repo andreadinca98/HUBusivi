@@ -5,6 +5,17 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan')
 const mongoose = require('mongoose');
 
+/*
+//var http = require('http');
+
+var server = http.createServer(function(req, res) { 
+  res.writeHead(200, {"Content-Type": "text/html"}); 
+  res.end('<p><html></head><body><h1>LOG-IN</h1><hr><form action= "/login" method="POST">Username: <input type = "text" name = "name"><br><br>Password: <input type = "text" name = "text"><br><br><form action=""><input type="radio" name="type" value="male" checked="true"> Student<br><input type="radio" name="type" value="female"> Teacher<br></form><button>Log-in</button><br></form></body></p>');
+});
+
+server.listen(PORT);*/
+
+
 app.use(express.static('./public'))
 
 const routerStudent = require('./routes/students.js')
@@ -22,17 +33,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //quello che fa nella pagina localhost:3000 -> Hello World!
-/*app.get('/',(req,res) => {
-    window
-})*/
-app.get('/', (req, res) => {
-    window.location.href = "./public/login.html"
-})
+app.get('/', (req, res) => res.send())
 app.listen(PORT, () => console.log('Example app listening on port: ' + PORT))
 
 //vari routers alle varie pagine 
 app.use('/teachers',routerTeacher)
-app.use(routerCourses)
+app.use('/courses',routerCourses)
 app.use('/marks',routerMarks)
 app.use('/students',routerStudent);
 app.use(routerAssignment)

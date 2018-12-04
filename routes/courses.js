@@ -49,7 +49,7 @@ coursesRouter.get('/courses/:studentId', function(req, res){
 		})
 })
 
-coursesRouter.post('/addcourse', function (req, res) {
+coursesRouter.post('/courses', function (req, res) {
 
 	const newCourse = new Course({
 		name: req.body.name, 
