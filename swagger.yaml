@@ -23,26 +23,31 @@ paths:
       description: Adds a student on the database
       operationId: addStudent
       parameters:
-        - name: badge number
+        - name: id_student
           in: query
-          description: badge number of student
+          description: id number of student
           type: integer
           x-exaple: 128888
         - name: email
           in: query
           description: data of the student
           type: string
-          x-example: "Pincopallino@gmail.com"
+          x-example: "pincopallino@gmail.com"
         - name: name
           in: query
           description: name of student
           type: string
           x-example: "Pinco"
+        - name: cognome
+          in: query
+          description: surname of student
+          type: string
+          x-example: "Pallino"
         - name: password
           in: query
           description: password for the login
           type: string
-          x-example: "Pallino"
+          x-example: "ppallino"
       responses:
         400:
           description: Bad request
@@ -57,9 +62,9 @@ paths:
       description: Returns a student from the database by ID
       operationId: getStudent
       parameters:
-        - name: id
+        - name: id_student
           in: query
-          description: if of the student
+          description: id of the student
           type: integer
           x-example: 198888
       responses:
@@ -74,9 +79,9 @@ paths:
       description: Removes a student from the database
       operationId: removeStudent
       parameters:
-        - name: badge_number
+        - name: id_student
           in: query
-          description: Badge number of student that I want to delete
+          description: id number of student that I want to delete
           type: integer
           x-example: 1
       responses:
@@ -92,11 +97,11 @@ paths:
       tags:
       - "Teacher"
       description: Adds a teacher
-      operationId: AddAssignment
+      operationId: Add Assignment
       parameters:
-        - name: ID
+        - name: id_teacher
           in: query
-          description: ID of teacher
+          description: id of the teacher
           type: integer
           x-exaple: 128888
         - name: email
@@ -109,11 +114,16 @@ paths:
           description: name of teacher
           type: string
           x-example: "Giorgio"
+        - name: surname
+          in: query
+          description: surname of the teacher
+          type: string
+          x-example: "Rodi"
         - name: password
           in: query
           description: password for the login
           type: string
-          x-example: "Pallino"
+          x-example: "grodi"
       responses:
         400:
           description: Bad request
@@ -125,9 +135,9 @@ paths:
       description: Returns a teacher from the database by ID
       operationId: getTeacher
       parameters:
-        - name: ID
+        - name: id_teacher
           in: query
-          description: ID of teacher
+          description: id of the teacher
           type: integer
           x-example: 198888
       responses:
@@ -143,9 +153,9 @@ paths:
         description: Returns a teacher from the database by ID
         operationId: getSpecTeacher
         parameters:
-          - name: teacherID
+          - name: id_teacher
             in: query
-            description: teacher ID
+            description: teacher id
             type: integer
             x-example: 1
         responses:
@@ -160,7 +170,7 @@ paths:
       description: Removes a teacher from the database
       operationId: RemoveTeacher
       parameters:
-        - name: teacherID
+        - name: id_teacher
           in: query
           description: ID of teacher that I want to delete
           type: integer
@@ -180,26 +190,37 @@ paths:
         description: Adds an Assignment(only teacher)
         operationId: addAssignment
         parameters:
-          - name: assignmentId 
+          - name: assignment_name
+            in: query
+            description: name of the assignment
+            type: string
+            x-example: "Assignment1" 
+          - name: description
+            in: query
+            description: description of the assignment
+            type: string
+            x-example: "description"
+          - name: id_assignment
             in: query
             description: id of the assignment
             type: string
             x-example: "Compito Gennaio"
-          - name: Delivery date
+          - name: upload date
             in: query
-            description: Delivery date of assignment
+            description: upload date of the assignment
             type: string
             x-example: "12/12/2018"
-          - name: Expire date
+          - name: expire date
             in: query
-            description: Expire date of assignment
+            description: Expire date of the assignment
             type: string
             x-example: "12/12/2018"
-          - name: courseId
+          - name: id_course
             in: query
             description: id of the course
             type: string
             x-example: "186495"
+          
         responses:
           400:
             description: Bad request
@@ -213,9 +234,9 @@ paths:
       description: Removes an assignment
       operationId: removeAssignment
       parameters:
-        - name: assignmentId
+        - name: id_assignment
           in: query
-          description: name of assignment
+          description: id of the assignment
           type: string
           x-example: "124354"
       responses:
@@ -230,7 +251,7 @@ paths:
       description: Updates an assignment
       operationId: updateAssignment
       parameters:
-          - name: assignmentId 
+          - name: id_assignment
             in: query
             description: id of the assignment
             type: string
@@ -266,21 +287,31 @@ paths:
       description: Adds a Mark (only teacher)
       operationId: addMark
       parameters:
-        - name: value
+        - name: mark
           in: query
-          description: voto da aggiungere
+          description: mark of the assignment
           type: integer
           x-example: 22
-        - name: matricola
+        - name: date
           in: query
-          description: matricola of the student 
+          description: date of the given mark
+          type: string
+          x-example: "05/12/2018"
+        - name: id_student
+          in: query
+          description: id of the student 
           type: integer
           x-example: 123456
-        - name: course_id
+        - name: id_mark
           in: query
-          description: course id of the mark
+          description: mark id of the mark
           type: integer
           x-example: 113355
+        - name: id_assignment
+          in: query
+          description: assignment id of the mark
+          type: integer
+          x-example: 113325
       responses:
         400:
           description: Bad request
@@ -293,12 +324,12 @@ paths:
       description: Removes a Mark of a specific exam of a student (only teacher)
       operationId: removeMark
       parameters:
-        - name: matricola
+        - name: id_student
           in: query
           description: matricola of the student
           type: integer
           x-example: 123456
-        - name: course_id
+        - name: id_course
           in: query
           description: course id of the mark
           type: integer
@@ -315,17 +346,17 @@ paths:
       description: Updates a mark of a specific exam of a student (only teacher)
       operationId: updateMark
       parameters:
-        - name: value
+        - name: mark
           in: query
           description: mark to update
           type: integer
           x-example: 22
-        - name: matricola
+        - name: id_student
           in: query
-          description: matricola of the student
+          description: id of the student
           type: integer
           x-example: 123456
-        - name: course_id
+        - name: id_course
           in: query
           description: course id of the mark
           type: integer
@@ -343,12 +374,12 @@ paths:
       description: Gets your marks of a specific course
       operationId: getMark
       parameters:
-        - name: matricola
+        - name: id_student
           in: query
-          description: matricola of the student
+          description: id of the student
           type: integer
           x-example: 123456
-        - name: course_id
+        - name: id_course
           in: query
           description: course id of the mark
           type: integer
@@ -367,7 +398,7 @@ paths:
         Calculates the marks average about a specific exam of a course(only teacher).
       operationId: avgMark
       parameters:
-        - name: course_id
+        - name: id_course
           in: query
           description: Course which I want to get the average of marks
           type: integer
@@ -386,7 +417,7 @@ paths:
       description: Adds a course(teacher)/Join a course(student)
       operationId: addCourse
       parameters:
-        - name: courseID
+        - name: id_course
           in: query
           description: course data
           type: string
@@ -405,9 +436,9 @@ paths:
       description: Gets the list of all your courses
       operationId: coursesList
       parameters:
-        - name: matricola
+        - name: id_student
           in: query
-          description: matricola of the user
+          description: id of the student
           type: integer
           x-example: 123456
       responses:
@@ -424,9 +455,9 @@ paths:
       description: Removes a course(teacher only)/Leave a course(student only)
       operationId: removeCourse
       parameters:
-        - name: coursID
+        - name: id_course
           in: query
-          description: Course which I want delete/leave
+          description: Course which I want to delete/leave
           type: integer
           x-example: 113355
       responses:
@@ -441,16 +472,36 @@ paths:
       description: Updates a Course(teacher only)
       operationId: updateCourse
       parameters:
-        - name: course info
+        - name: course name
           in: query
-          description: course info
+          description: course name
           type: string
           x-example: 'Ingegneria del software - 2'
-        - name: course_id
+        - name: id_course
           in: query
           description: course id
           type: integer
           x-example: 113355
+        - name: description
+          in: query
+          description: course description
+          type: string
+          x-example: "description"
+        - name: start
+          in: query
+          description: start of the course
+          type: string
+          x-example: "22/10/2018"
+        - name: id_teacher
+          in: query
+          description: id teacher of the course
+          type: integer
+          x-example: 163355
+        - name: end
+          in: query
+          description: end of the course
+          type: string
+          x-example: "23/04/2019"
       responses:
         400:
           description: Bad request
