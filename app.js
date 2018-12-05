@@ -42,7 +42,7 @@ app.use('/teachers',routerTeacher)
 app.use('/courses',routerCourses)
 app.use('/marks',routerMarks)
 app.use('/students',routerStudent);
-app.use(routerAssignment)
+app.use('/assigments',routerAssignment)
 
 
 //ERRORI: se non è stato fatto nulla di quello sopra allora darà un errore
