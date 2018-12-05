@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Course = require('../models/course.js'); 
 
 
-coursesRouter.get('/courses', function(req, res){
+coursesRouter.get('/', function(req, res){
 	console.log('Getting courses')
     Course.find()
     .exec(function(err, courses){
@@ -19,7 +19,7 @@ coursesRouter.get('/courses', function(req, res){
 		})
 })
 
-coursesRouter.get('/courses/:teacherId', function(req, res){
+coursesRouter.get('/:teacherId', function(req, res){
 	const teacherid = req.params.teacherId;
 	console.log('Getting courses')
     Course.find({t_id: teacherid})
@@ -34,7 +34,7 @@ coursesRouter.get('/courses/:teacherId', function(req, res){
 		})
 })
 
-coursesRouter.get('/courses/:studentId', function(req, res){
+coursesRouter.get('/:studentId', function(req, res){
 	const studentid = req.params.studentId;
 	console.log('Getting courses')
     Course.find({s_id: studentid})
@@ -49,7 +49,7 @@ coursesRouter.get('/courses/:studentId', function(req, res){
 		})
 })
 
-coursesRouter.post('/courses', function (req, res) {
+coursesRouter.post('/', function (req, res) {
 
 	const newCourse = new Course({
 		name: req.body.name, 
@@ -75,7 +75,7 @@ coursesRouter.post('/courses', function (req, res) {
 		});
 });
 
-coursesRouter.delete('/courses/:coursesId', (req,res,next) => {
+coursesRouter.delete('/:coursesId', (req,res,next) => {
 	const courseid = req.params.coursesId;
 	Course.deleteOne({_id: courseid})
 	.exec()
@@ -93,7 +93,7 @@ coursesRouter.delete('/courses/:coursesId', (req,res,next) => {
 });
 
 //funzione update da testare
-coursesRouter.post('/updatecourses/:coursesId', function(req, res){  //put!
+coursesRouter.post('/:coursesId', function(req, res){  //put!
 	const courseid = req.params.coursesId;
 	Course.findOne({_id: courseid}, function(err, foundCourse){
 		if(err){
