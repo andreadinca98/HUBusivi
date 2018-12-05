@@ -4,6 +4,9 @@ const express = require('express');
 
 var apiRoutes = express.Router();
 
+//var tokenChecker = require('../middlewares/tockenChecker');
+//apiRoutes.use(tokenChecker);
+
 const routerStudent = require('./students.js')
 apiRoutes.use('/students',routerStudent);
 

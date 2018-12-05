@@ -3,11 +3,24 @@ const PORT = process.env.PORT || 3000
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const Student   = require('./models/student');
+
 
 // setup express 
 const app = express();
 
 app.use(express.static('./public'));
+
+
+
+
+var nick = Student.findOrCreate({
+    name: 'nick', 
+    password: 'nick'
+  });
+
+var authenticationRoutes = require('./routes/authentication.js');
+app.use('/authentication', authenticationRoutes);
 
 // api routes
 var apiRoutes = require('./routes/apis.js');
@@ -41,7 +54,7 @@ app.use((error,req,res,next)=>{
         }
     })
 })
-
+/*
 //effettuare login
 app.get('/checkLogin',function(req, res){
     const tipo = req.body.type.getValue
@@ -54,6 +67,7 @@ app.get('/checkLogin',function(req, res){
     }
     if(tipo == 'teacher'){
         console.log('t')
-    }*/
+    }
 
 })
+*/
