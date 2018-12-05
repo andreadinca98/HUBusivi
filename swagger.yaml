@@ -278,6 +278,25 @@ paths:
           description: Resources not found
         200:
           description: Successful response
+
+  /assignment/avg:
+    post:
+      description: >-
+        Calculates the marks average about a specific assignment of a course(only teacher).
+      operationId: avgMark
+      parameters:
+        - name: assignmentID
+          in: query
+          description: Course which I want to get the average of marks
+          type: integer
+          x-example: 113355
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Marks average
           
   
   /marks:
@@ -391,26 +410,6 @@ paths:
           description: Resources not found
         200:
           description: Successful response
-          
-  /marks/avg:
-    post:
-      description: >-
-        Calculates the marks average about a specific exam of a course(only teacher).
-      operationId: avgMark
-      parameters:
-        - name: id_course
-          in: query
-          description: Course which I want to get the average of marks
-          type: integer
-          x-example: 113355
-      responses:
-        400:
-          description: Bad request
-        404:
-          description: Resources not found
-        200:
-          description: Marks average
-          
   
   /courses:
     put:
