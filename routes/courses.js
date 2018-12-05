@@ -14,7 +14,7 @@ coursesRouter.get('/courses', function(req, res){
         }
         else{
             console.log('List of courses')
-            res.json(courses)
+            res.json(courses) //filtro
 			}
 		})
 })
@@ -49,7 +49,7 @@ coursesRouter.get('/courses/:studentId', function(req, res){
 		})
 })
 
-coursesRouter.post('/addcourse', function (req, res) {
+coursesRouter.post('/courses', function (req, res) {
 
 	const newCourse = new Course({
 		name: req.body.name, 
@@ -93,7 +93,7 @@ coursesRouter.delete('/courses/:coursesId', (req,res,next) => {
 });
 
 //funzione update da testare
-coursesRouter.post('/updatecourse/:coursesId', function(req, res){
+coursesRouter.post('/updatecourses/:coursesId', function(req, res){  //put!
 	const courseid = req.params.coursesId;
 	Course.findOne({_id: courseid}, function(err, foundCourse){
 		if(err){
