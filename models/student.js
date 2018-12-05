@@ -7,5 +7,3 @@ const studentSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model('Student', studentSchema);
-
- 

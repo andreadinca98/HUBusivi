@@ -7,32 +7,44 @@ const Assignment = require('../models/assignment.js')
 
 app.use(bodyParser.urlencoded({extended: false}))
 
-//
-router.get('/assignment', (req,res) =>{
-    Assignment
-    .findAll()
-    .exec()
-    .then(docs => {
-        console.log(docs);
-        res.status(200).json(docs);
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json({
-            message: 'Handling GET requests to /assignment',
-            error: err
-        })
-    })
-    /*var results
-    const queryString = "SELECT * FROM assignments INNER JOIN users ON assignments.matricola = users.matricola WHERE matricola = ?"
-    connection.query(queryString,[matricola],(err, rows, fields) =>{
+router.get('/assignment', function(req, res){
+	console.log('Getting assignments')
+    Assignment.find()
+    .exec(function(err, courses){
         if(err){
-            console.log("Failed to query for users: " + err )
-            res.sendStatus(500)
-            return
+            res.end('Error has occured')
         }
-        results = res.rows()
-    })*/
+        else{
+            console.log('List of courses')
+            res.json(courses)
+			}
+		})
+})
+
+router.get('/assignment/:studentId', (req,res) =>{
+    console.log('Getting assignment')
+    const sId = req.params.studentId;
+	    
+    Assignment.findOne({studentid: sId})
+    .exec(function(err, courses){
+        if(err){
+            res.end('Error has occured')
+        }
+        else{
+            console.log('List of courses')
+            res.json(courses)
+			}
+    })
+    .then(result => {
+		res.status(200).json(result);
+	})
+	.catch(err => {
+		console.log(err);
+		res.status(500).json({
+			message: "Errore lista assignment",
+			error: err
+		})
+	})
 })
 
 router.post('/assignment_create', (req,res) =>{
@@ -65,7 +77,7 @@ router.post('/assignment_create', (req,res) =>{
 router.get('/:assignmentId',(req,res,next) =>{
     const id = req.params.assignmentId;
     Assignment
-    .findById(id)
+    .findOne({_id: id})
 	.exec()
 	.then(doc => {		
 		console.log(doc),		
@@ -83,9 +95,8 @@ router.get('/:assignmentId',(req,res,next) =>{
 
 
 router.delete('/assignment/:assignmentId', (req,res) =>{
-    const id = req.params.assignmentId;
-    Assignment
-    .remove({_id: id})
+    const assignmentId = req.params.assignmentId
+	Assignment.deleteOne({_id: assignmentId})
 	.exec()
 	.then(result => {
 		res.status(200).json(result);
@@ -96,7 +107,8 @@ router.delete('/assignment/:assignmentId', (req,res) =>{
 			message: "Assignment non rimosso",
 			error: err
 		})
-	});
+	})
+	
 })
 
 /*router.update('/assignment/:assignmentId', (req,res) =>{
@@ -133,6 +145,5 @@ router.delete('/assignment/:assignmentId', (req,res) =>{
         })
     }
 })*/
-
 
 module.exports = router
