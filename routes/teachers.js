@@ -3,6 +3,7 @@ const express = require('express')
 const Teacher = require('../models/teacher.js')
 const mongoose = require('mongoose');
 const teachersRoutes = express.Router();
+
 //restituisce tutti i docenti nel Database
 teachersRoutes.get('/', (req,res,next) =>{
 	Teacher
@@ -25,7 +26,9 @@ teachersRoutes.get('/', (req,res,next) =>{
 teachersRoutes.post('/', function (req, res) {
 	const teacher = new Teacher({
 		_id : new mongoose.Types.ObjectId(),
-		name : req.body.name
+		name : req.body.name,
+		cognome : req.body.cognome,
+		email : req.body.email
 	});
 
 	//.save mette tutto nel DB
@@ -63,7 +66,6 @@ teachersRoutes.post('/', function (req, res) {
 				error: err
 			});
 		});
-
 	});
 
 	//delete

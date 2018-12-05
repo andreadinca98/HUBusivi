@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const marksSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    mark: Number,
+    voto: Number,
     id_student: Number,
-    courseId: String
+    id_assignment: String
 })
 
 module.exports = mongoose.model('Marks', marksSchema);

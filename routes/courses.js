@@ -4,8 +4,7 @@ const coursesRouter = express.Router();
 const mongoose = require('mongoose');
 const Course = require('../models/course.js'); 
 
-
-coursesRouter.get('/courses', function(req, res){
+coursesRouter.get('/', function(req, res){
 	console.log('Getting courses')
     Course.find()
     .exec(function(err, courses){
@@ -19,43 +18,15 @@ coursesRouter.get('/courses', function(req, res){
 		})
 })
 
-coursesRouter.get('/courses/:teacherId', function(req, res){
-	const teacherid = req.params.teacherId;
-	console.log('Getting courses')
-    Course.find({t_id: teacherid})
-    .exec(function(err, courses){
-        if(err){
-            res.end('Error has occured')
-        }
-        else{
-            console.log('List of courses')
-            res.json(courses)
-			}
-		})
-})
-
-coursesRouter.get('/courses/:studentId', function(req, res){
-	const studentid = req.params.studentId;
-	console.log('Getting courses')
-    Course.find({s_id: studentid})
-    .exec(function(err, courses){
-        if(err){
-            res.end('Error has occured')
-        }
-        else{
-            console.log('List of courses')
-            res.json(courses)
-			}
-		})
-})
-
-coursesRouter.post('/courses', function (req, res) {
+coursesRouter.post('/', function (req, res) {
 
 	const newCourse = new Course({
-		name: req.body.name, 
+		_id: new mongoose.Types.ObjectId(),
+		name: req.body.name,
 		description : req.body.description,
-		t_id: req.body.t_id,
-		s_id: req.body.s_id
+		begin: req.body.begin,
+		end: req.body.end,
+		teacher_id: req.body.teacherId
 	});
 
 	newCourse
@@ -75,7 +46,22 @@ coursesRouter.post('/courses', function (req, res) {
 		});
 });
 
-coursesRouter.delete('/courses/:coursesId', (req,res,next) => {
+coursesRouter.get('/:coursesId', function(req, res){
+	const teacherid = req.params.teacherId;
+	console.log('Getting courses')
+    Course.find({t_id: teacherid})
+    .exec(function(err, courses){
+        if(err){
+            res.end('Error has occured')
+        }
+        else{
+            console.log('List of courses')
+            res.json(courses)
+			}
+		})
+})
+
+coursesRouter.delete('/:coursesId', (req,res,next) => {
 	const courseid = req.params.coursesId;
 	Course.deleteOne({_id: courseid})
 	.exec()
@@ -93,7 +79,7 @@ coursesRouter.delete('/courses/:coursesId', (req,res,next) => {
 });
 
 //funzione update da testare
-coursesRouter.post('/updatecourse/:coursesId', function(req, res){
+coursesRouter.put('/:coursesId', function(req, res){
 	const courseid = req.params.coursesId;
 	Course.findOne({_id: courseid}, function(err, foundCourse){
 		if(err){

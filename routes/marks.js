@@ -29,9 +29,9 @@ usersRoutes.post('/', function (req, res) {
 
 	const marks = new Marks({
         _id: new mongoose.Types.ObjectId(),
-        mark:  req.body.marks,
-        id_marks:  req.body.id_marks,
-        courseId:  req.body.courseId				
+        voto:  req.body.marks,
+        id_assignment:  req.body.id_assignment,
+        id_studente:  req.body.id_studente				
 	});
 	
 	//.save mette tutto nel DB
