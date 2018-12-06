@@ -39,10 +39,10 @@ app.listen(PORT, () => console.log('Example app listening on port: ' + PORT))
 
 //vari routers alle varie pagine 
 app.use('/teachers',routerTeacher)
-app.use('/courses',routerCourses)
+app.use('/courses', routerCourses)
 app.use('/marks',routerMarks)
 app.use('/students',routerStudent);
-app.use('/assigments',routerAssignment)
+//app.use(routerAssignment)
 
 
 //ERRORI: se non è stato fatto nulla di quello sopra allora darà un errore
