@@ -1,15 +1,21 @@
 const express = require('express');
 const jwt     = require('jsonwebtoken'); // used to create, sign, and verify tokens
 const config = require('../config.js'); // get our config file
-const User = require('../models/student.js');
+const Student = require('../models/student.js');
+const Teacher = require('../models/teacher.js');
 
 const authenticationRouter = express.Router(); 
 
 authenticationRouter.post('/', async function(req, res) {
 
 	// find the user
-	const user = await User.findOne( { name: req.body.name } )
-
+	if(req.body.type = "student"){
+		const user = await Student.findOne( { name: req.body.name } )
+	}
+	if(req.body.type = "teacher"){
+		const user = await Teacher.findOne( { name: req.body.name } )
+	}
+	
 	if (!user) {
 		// user not found
 		res.json({ success: false, message: 'Authentication failed. User not found.' });
@@ -34,7 +40,13 @@ authenticationRouter.post('/', async function(req, res) {
 				expiresIn: 86400 // expires in 24 hours
 			}
 			var token = jwt.sign(payload, config.superSecret, options);
-
+			if(req.body.type = "student"){
+				token += "s";
+			}
+			if(req.body.type = "teacher"){
+				token += "t";	
+			}
+			
 			// signed in
 			res.json({ success: true, message: 'Enjoy your token!', token: token });
 		}
