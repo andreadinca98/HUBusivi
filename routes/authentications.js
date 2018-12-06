@@ -7,13 +7,14 @@ const Teacher = require('../models/teacher.js');
 const authenticationRouter = express.Router(); 
 
 authenticationRouter.post('/', async function(req, res) {
-
+	console.log("fads")
 	// find the user
+	var user
 	if(req.body.type = "student"){
-		const user = await Student.findOne( { name: req.body.name } )
+		user = await Student.findOne( { name: req.body.name } )
 	}
 	if(req.body.type = "teacher"){
-		const user = await Teacher.findOne( { name: req.body.name } )
+		user = await Teacher.findOne( { name: req.body.name } )
 	}
 	
 	if (!user) {
