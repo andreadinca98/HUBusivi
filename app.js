@@ -36,7 +36,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //quello che fa nella pagina localhost:3000 -> Hello World!
 
-app.get('/', (req, res) => res.send())
+//const routerLogin = require('./public/login.html');
+
+//app.use('/',routerTeacher)
+
+app.get('/', (req, res) => {
+    //res.writeHead(200, {"Content-Type": "text/html"}); 
+    //res.end('<p><html></head><body><h1>LOG-IN</h1><hr><form action= \"/authentications\" method=\"POST\">Username: <input type = \"text\" name = \"name\"><br><br>Password: <input type = \"text\" name = \"text\"><br><br><fo\rm action=""><input type="radio" name="type" value="male" checked="true"> Student<br><input type="radio" name="type" value="female"> Teacher<br></form><button>Log-in</button><br></form></body></p>');
+})
 app.listen(PORT, () => console.log('Example app listening on port: ' + PORT))
 
 //vari routers alle varie pagine 

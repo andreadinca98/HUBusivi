@@ -9,11 +9,11 @@ const authenticationRouter = express.Router();
 authenticationRouter.post('/', async function(req, res) {
 	console.log("fads")
 	// find the user
-	var user
-	if(req.body.type = "student"){
+	var user = null
+	if(req.body.type == "student"){
 		user = await Student.findOne( { name: req.body.name } )
 	}
-	if(req.body.type = "teacher"){
+	if(req.body.type == "teacher"){
 		user = await Teacher.findOne( { name: req.body.name } )
 	}
 	
@@ -41,10 +41,10 @@ authenticationRouter.post('/', async function(req, res) {
 				expiresIn: 86400 // expires in 24 hours
 			}
 			var token = jwt.sign(payload, config.superSecret, options);
-			if(req.body.type = "student"){
+			if(req.body.type == "student"){
 				token += "s";
 			}
-			if(req.body.type = "teacher"){
+			if(req.body.type == "teacher"){
 				token += "t";	
 			}
 			

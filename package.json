@@ -27,6 +27,7 @@
     "uniqid": "^5.0.3"
   },
   "devDependencies": {
+    "heroku": "^7.19.3",
     "mongoose": "^5.3.14",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.7"

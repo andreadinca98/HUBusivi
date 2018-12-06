@@ -25,7 +25,9 @@ teachersRoutes.get('/', (req,res,next) =>{
 teachersRoutes.post('/', function (req, res) {
 	const teacher = new Teacher({
 		_id : new mongoose.Types.ObjectId(),
-		name : req.body.name
+		email : req.body.email,
+		name: req.body.name,
+		password: req.body.password
 	});
 
 	//.save mette tutto nel DB

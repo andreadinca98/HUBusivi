@@ -28,7 +28,8 @@ usersRoutes.post('/', function (req, res) {
 	const student = new Student({
 		_id : new mongoose.Types.ObjectId(),
 		email : req.body.email,
-		corso: req.body.corso				
+		name: req.body.name,
+		password: req.body.password	
 	});
 	
 	//.save mette tutto nel DB
