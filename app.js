@@ -23,6 +23,8 @@ const routerTeacher = require('./routes/teachers.js')
 const routerAssignment = require('./routes/assignment.js')
 const routerMarks = require('./routes/marks.js')
 const routerCourses = require('./routes/courses.js')
+const routerAuthentication = require('./routes/authentications.js');
+
 
 //connessione al DB MongoD
 mongoose.connect("mongodb://stefanopretto:hubusivi_2018@cluster0-shard-00-00-gmemg.mongodb.net:27017,cluster0-shard-00-01-gmemg.mongodb.net:27017,cluster0-shard-00-02-gmemg.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true", { useNewUrlParser: true });
@@ -42,6 +44,7 @@ app.use('/teachers',routerTeacher)
 app.use('/courses', routerCourses)
 app.use('/marks',routerMarks)
 app.use('/students',routerStudent);
+app.use('/authentications', routerAuthentication)
 //app.use(routerAssignment)
 
 
@@ -61,17 +64,17 @@ app.use((error,req,res,next)=>{
     })
 })
 
-app.get('/checkLogin',function(req, res){
+/*app.get('/checkLogin',function(req, res){
     const tipo = req.body.type.getValue
     const a = document.getElementsByName('type')
     console.log(a)
     const nome = req.body.name
     const pass = req.body.password
-    /*if(tipo == 'student'){
+    if(tipo == 'student'){
         console.log('s')     
     }
     if(tipo == 'teacher'){
         console.log('t')
-    }*/
+    }
 
-})
+})*/
