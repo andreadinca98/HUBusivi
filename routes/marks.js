@@ -5,7 +5,7 @@ const usersRoutes = express.Router();
 const mongoose = require('mongoose');
 const Marks = require('../models/mark.js'); 
 
-//restituisce tuti gli studenti nel Database
+
 usersRoutes.get('/', (req,res,next) => {
 	Marks
 	.find()

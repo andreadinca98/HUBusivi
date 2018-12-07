@@ -20,7 +20,7 @@ teachersRoutes.get('/', (req,res,next) =>{
 		});
 	});
 });
-//Inserisci studente nel DB, andare in body di Postman 
+//Inserisci teacher nel DB, andare in body di Postman 
 //e aggiungere in linguaggio JSON email,nome e cognome
 teachersRoutes.post('/', function (req, res) {
 	const teacher = new Teacher({
@@ -49,7 +49,7 @@ teachersRoutes.post('/', function (req, res) {
 		});
 	});
 
-	//Restituisce gli studenti con quelli ID
+	//Restituisce l'insegnanti con quel ID
 	teachersRoutes.get('/:teachersId', (req,res,next) => {	
 		const id = req.params.teachersId;
 		Teacher.findById(id)
