@@ -54,7 +54,8 @@ router.post('/assignment_create', (req,res) =>{
         name: req.body.name,
         text: req.body.text,
         expiredata: req.body.data,
-        uploaddata:today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate()
+        uploaddata:today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate(),
+        studentId: req.body.studentId
     })
 
     assignment

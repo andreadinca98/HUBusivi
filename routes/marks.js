@@ -30,7 +30,7 @@ usersRoutes.post('/', function (req, res) {
 	const marks = new Marks({
         _id: new mongoose.Types.ObjectId(),
         mark:  req.body.marks,
-        id_marks:  req.body.id_marks,
+        id_student:  req.body.studentId,
         courseId:  req.body.courseId				
 	});
 	
