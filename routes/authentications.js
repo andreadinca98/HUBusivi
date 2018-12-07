@@ -49,7 +49,8 @@ authenticationRouter.post('/', async function(req, res) {
 			}
 			
 			// signed in
-			res.json({ success: true, message: 'Enjoy your token!', token: token });
+			//res.json({ success: true, message: 'Enjoy your token!', token: token });
+			res.redirect('/courses/'+user.id)
 		}
 
 	}

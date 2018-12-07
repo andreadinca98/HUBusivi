@@ -29,9 +29,9 @@ usersRoutes.post('/', function (req, res) {
 
 	const marks = new Marks({
         _id: new mongoose.Types.ObjectId(),
-        mark:  req.body.marks,
-        id_student:  req.body.studentId,
-        courseId:  req.body.courseId				
+        mark:  req.body.mark,
+        studentId:  req.body.studentId,
+        assignmentId:  req.body.assignmentId				
 	});
 	
 	//.save mette tutto nel DB
@@ -46,7 +46,7 @@ usersRoutes.post('/', function (req, res) {
 	})
 	.catch(err => {
 		res.status(500).json({
-			message: "Studente non inserito",
+			message: "Voto non inserito",
 			error: err
 		});	
 	});
@@ -59,6 +59,32 @@ usersRoutes.get('/:marksId', (req,res,next) => {
 	.exec()
 	.then(doc => {		
 		console.log(doc),		
+		res.status(200).json(doc)
+	})
+	.catch(err => {
+		console.log(err);
+		res.status(500).json({
+			message: "Non è stato trovato il voto",
+			error: err
+		});
+	});
+});
+
+usersRoutes.get('/avg/:assignmentId', (req,res,next) => {	
+	const id = req.params.assignmentId;
+	Marks.find({assignmentId : id})
+	.exec()
+	.then(doc => {
+		console.log(doc.length)
+		console.log(doc.values.mark)
+		var avg = 0
+		var i = 0
+		for(i = 0;i<doc.length;i++){
+			avg += doc.mark
+			
+		}	
+		avg = avg/i
+		console.log(doc + " - " +avg ),		
 		res.status(200).json(doc)
 	})
 	.catch(err => {
@@ -105,7 +131,6 @@ usersRoutes.get('/:couseId', (req,res,next) => {
 		});
 	});
 });
-
 
 
 module.exports = usersRoutes;
