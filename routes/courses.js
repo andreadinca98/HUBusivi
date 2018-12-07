@@ -5,41 +5,31 @@ const mongoose = require('mongoose');
 const Course = require('../models/course.js'); 
 
 
-coursesRouter.get('/', function(req, res){
+coursesRouter.get('/', function (req, res) {
 	console.log('Getting courses')
-			if(req.body.s_id){
-				Course.find({s_id: req.body.s_id}, function(err, foundCourses){
-					if(err){
-						console.log(err)
-						res.status(500).send();
-					}
-					else{
-						res.json(foundCourses)
-					}
-				});
-			}
-			if(req.body.t_id){
-				Course.find({t_id: req.body.t_id}, function(err, foundCourses){
-					if(err){
-						console.log(err)
-						res.status(500).send();
-					}
-					else{
-						res.json(foundCourses)
-					}
-				});
-			}
-			else{
-				Course.find({}, function(err, foundCourses){
-					if(err){
-						console.log(err)
-						res.status(500).send();
-					}
-					else{
-						res.json(foundCourses)
-					}
-				})
-			}
+	Course.find({}, function (err, foundCourses) {
+		if (err) {
+			console.log(err)
+			res.status(500).send();
+		}
+		else {
+			res.json(foundCourses)
+		}
+	})
+})
+
+//get tramite id
+coursesRouter.get('/:coursesId', function (req, res) {
+	console.log('Getting courses for id')
+	Course.find({ $or: [{ s_id: req.params.coursesId }, { t_id: req.params.coursesId }] }, function (err, foundCourses) {
+		if (err) {
+			console.log(err)
+			res.status(500).send();
+		}
+		else {
+			res.json(foundCourses)
+		}
+	})
 })
 
 coursesRouter.post('/', function (req, res) {
