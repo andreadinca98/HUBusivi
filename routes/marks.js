@@ -70,6 +70,7 @@ usersRoutes.post('/', function (req, res) {
 	});
 });*/
 
+//average 
 usersRoutes.get('/:assignmentId', (req,res,next) => {	
 	const assignmentid = req.params.assignmentId;
 	Marks.find({assignmentId: assignmentid}, function (err, foundMarks) {
@@ -81,9 +82,9 @@ usersRoutes.get('/:assignmentId', (req,res,next) => {
 			var i = 0;
 			var avg = 0;
 			for(i = 0; i<foundMarks.length; i++){
-				avg = foundMarks[i].mark;
+				avg += foundMarks[i].mark;
 			}
-			avg = avg/i;
+			avg = +(avg/i).toFixed(2);
 			res.json(avg)
 		}
 	})
