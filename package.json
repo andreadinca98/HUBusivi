@@ -25,11 +25,11 @@
     "mongodb": "^3.1.10",
     "mysql": "^2.16.0",
     "uniqid": "^5.0.3",
-    "nodemon": "^1.18.7"
+    "nodemon": "^1.18.7",
+    "morgan": "^1.9.1"
   },
   "devDependencies": {
     "heroku": "^7.19.3",
-    "mongoose": "^5.3.14",
-    "morgan": "^1.9.1"
+    "mongoose": "^5.3.14"
   }
 }
