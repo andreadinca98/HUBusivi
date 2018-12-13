@@ -7,7 +7,7 @@ info:
     name: MIT
     url: https://github.com/apiaryio/polls-api/blob/master/LICENSE
 host: ingegneriasoftwa2.herokuapp.com
-basePath: /
+basePath: /api/v2
 schemes:
 - https
 consumes:
@@ -16,7 +16,7 @@ produces:
 - application/json 
 paths:
   
-  /api/v2/students:
+  /students:
     post:
       tags: 
       - "Students"
@@ -57,7 +57,7 @@ paths:
           description: Successful response
     
   
-  /api/v2/students/studentId:
+  /students/studentId:
     get:
       description: Returns a student from the database by ID
       operationId: getStudent
@@ -92,7 +92,7 @@ paths:
         200:
           description: Successful response
   
-  /api/v2/teacher:
+  /teacher:
     post:
       tags:
       - "Teacher"
@@ -148,7 +148,7 @@ paths:
         200:
           description: Successful response
     
-  /api/v2/teacher/teacherID:
+  /teacher/teacherID:
     get:
         description: Returns a teacher from the database by ID
         operationId: getSpecTeacher
@@ -183,7 +183,7 @@ paths:
         200:
           description: Successful response
   
-  /api/v2/assignment:
+  /assignment:
     post: 
         tags: 
         - "Assignment"
@@ -229,7 +229,7 @@ paths:
           200:
             description: Successful response
 
-  /api/v2/api/v2/assignment/assignmentId:  
+  /assignment/assignmentId:  
     delete:
       description: Removes an assignment
       operationId: removeAssignment
@@ -279,7 +279,7 @@ paths:
         200:
           description: Successful response
 
-  /api/v2/assignment/avg:
+  /assignment/avg:
     post:
       description: >-
         Calculates the marks average about a specific assignment of a course(only teacher).
@@ -299,7 +299,7 @@ paths:
           description: Marks average
           
   
-  /api/v2/marks:
+  /marks:
     post:
       tags:
       - "Marks"
@@ -388,7 +388,7 @@ paths:
         200:
           description: Successful response
   
-  /api/v2/marks/courseId:
+  /marks/courseId:
     get:
       description: Gets your marks of a specific course
       operationId: getMark
@@ -411,7 +411,7 @@ paths:
         200:
           description: Successful response
   
-  /api/v2/courses:
+  /courses:
     put:
       description: Adds a course(teacher)/Join a course(student)
       operationId: addCourse
@@ -449,7 +449,7 @@ paths:
           description: List of all your courses
 
 
-  /api/v2/courses/courseId:  
+  /courses/courseId:  
     delete:
       description: Removes a course(teacher only)/Leave a course(student only)
       operationId: removeCourse
