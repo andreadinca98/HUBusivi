@@ -32,6 +32,22 @@ coursesRouter.get('/:coursesId', function (req, res) {
 	})
 })
 
+//get tramite id
+coursesRouter.get('/:userId', function (req, res) {
+    console.log('Getting courses for id')
+    Course.find({ $or: [{ s_id: req.params.userId }, { t_id: req.params.userId }] }, function (err, foundCourses) {
+        if (err) {
+            console.log(err)
+            res.status(500).send();
+        }
+        else {
+
+            res.json(foundCourses)
+
+        }
+    })
+})
+
 coursesRouter.post('/', function (req, res) {
 
 	const newCourse = new Course({
