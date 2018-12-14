@@ -42,7 +42,7 @@ authenticationRouter.post('/', async function(req, res) {
 			var token = jwt.sign(payload, config.superSecret, options);
 			if(req.body.type == "student"){
 				res.redirect(url.format({
-					pathname: "/checker",
+					pathname: "/api/v2/checker",
 					query: {
 						"id" : user.id,
 						"t" : "s",
@@ -52,7 +52,7 @@ authenticationRouter.post('/', async function(req, res) {
 			}
 			if(req.body.type == "teacher"){
 				res.redirect(url.format({
-					pathname: "/checker",
+					pathname: "/api/v2/checker",
 					query: {
 						"id" : user.id,
 						"t" : "t",
