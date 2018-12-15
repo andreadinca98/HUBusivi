@@ -9,9 +9,9 @@ describe('GET Assignment', function(){
       });
 });
 
-describe('POST Marks', function(){
+describe('POST Asignment', function(){
     it("returns status 201", function(done){
-        request(mark).post("/")
+        request(assignment).post("/")
             .expect(201);
         done();
     })

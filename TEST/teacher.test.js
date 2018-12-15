@@ -9,9 +9,9 @@ describe('GET Teacher', function(){
       });
 });
 
-describe('POST Marks', function(){
+describe('POST Teacher', function(){
     it("returns status 201", function(done){
-        request(mark).post("/")
+        request(teacher).post("/")
             .expect(201);
         done();
     })
