@@ -24,7 +24,7 @@ router.get('/', function(req, res){
 //funzione per ricevere solo i corsi disponibili dallo studente
 router.get('/:studentId', function (req, res) {
 	console.log('Getting courses for id')
-	Assignment.find({ $and: [{ studentId: req.params.studentId }, { active: true }] }, function (err, foundAssignments) {
+	Assignment.find({ $or: [{ s_id: req.params.userId }, { t_id: req.params.userId }] }, function (err, foundCourses){
 		if (err) {
 			console.log(err)
 			res.status(500).send();

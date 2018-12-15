@@ -24,3 +24,21 @@ describe('DELETE Course', function(){
         done();
     })
 })
+/*
+describe('RESEARCH on Course by Student Id', function(){
+    it("returns status 200", function(done){
+        request(course).delete("/")
+            .expect(200);
+        done();
+    })
+})
+*/
+
+describe('RESEARCH on Course by Student Id', function() {
+    describe('#find()', function() {
+      it('should save return all the user with this course', function(done) {
+        var user = new User('Luna');
+        student.find(done);
+      });
+    });
+  });
