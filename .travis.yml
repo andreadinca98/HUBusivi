@@ -12,5 +12,5 @@ install:
 before_script:
   - "npm info dredd version"
 script:
-  -npm test
+  - npm test
   after_success: npm run coverage
