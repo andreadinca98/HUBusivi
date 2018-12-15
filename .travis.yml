@@ -10,4 +10,5 @@ deploy:
 install:
   - "npm install --no-optional"
 before_script:
+  - "cd TEST"
   - "npm info dredd version"
