@@ -15,11 +15,16 @@
 #   - make test
 language: node_js
 node_js:
-  - "8"
+  - "0.10"
 install:
-  - npm install i
+  - npm install phantomjs -g
+  - npm install -g mocha-phantomjs
+  - npm install -g gulp
+  - npm install -g bower
+  - npm install
+  - bower install
 before_script:
-#  - phantomjs --version
+  - phantomjs --version
   - mocha-phantomjs --version
   - gulp &
   - sleep 5 # give gulp background task some time to execute.
