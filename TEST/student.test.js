@@ -17,3 +17,11 @@ describe('GET Student', function(){
         done();
       });
 });
+
+describe('POST Student', function(){
+    it("returns status 201", function(done){
+        request(student).post("/")
+            .expect(201);
+        done();
+    })
+})

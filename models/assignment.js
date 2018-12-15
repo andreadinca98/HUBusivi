@@ -8,7 +8,8 @@ const assignmentSchema = mongoose.Schema({
 	expireData: { type:String, require: true },
 	uploadData: { type:String, require: true },
 	studentId: { type: String, require: true },
-	courseId: { type: String, require: true }
+	courseId: { type: String, require: true },
+	active: { type: Boolean, default: true }
 });
 
 module.exports = mongoose.model('Assignment', assignmentSchema);

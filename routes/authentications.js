@@ -1,9 +1,9 @@
 const express = require('express');
 const jwt     = require('jsonwebtoken'); // used to create, sign, and verify tokens
-const config = require('../config.js'); // get our config file
+const config  = require('../config.js'); // get our config file
 const Student = require('../models/student.js');
 const Teacher = require('../models/teacher.js');
-const url = require('url')
+const url 	  = require('url')
 
 const authenticationRouter = express.Router(); 
 

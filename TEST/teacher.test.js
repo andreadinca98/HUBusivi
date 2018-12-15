@@ -8,3 +8,11 @@ describe('GET Teacher', function(){
         done();
       });
 });
+
+describe('POST Teacher', function(){
+    it("returns status 201", function(done){
+        request(teacher).post("/")
+            .expect(201);
+        done();
+    })
+})
