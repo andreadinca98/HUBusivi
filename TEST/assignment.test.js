@@ -8,3 +8,11 @@ describe('GET Assignment', function(){
         done();
       });
 });
+
+describe('POST Marks', function(){
+    it("returns status 201", function(done){
+        request(mark).post("/")
+            .expect(201);
+        done();
+    })
+})
