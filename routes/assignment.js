@@ -7,7 +7,7 @@ const Assignment = require('../models/assignment.js')
 
 app.use(bodyParser.urlencoded({extended: false}))
 
-router.get('/assignment', function(req, res){
+router.get('/', function(req, res){
 	console.log('Getting assignments')
     Assignment.find()
     .exec(function(err, courses){
@@ -47,14 +47,17 @@ router.get('/assignment/:studentId', (req,res) =>{
 	})
 })
 
-router.post('/assignment_create', (req,res) =>{
+router.post('/', (req,res) =>{
     const today = new Date();
+    const t = today.getDate() + "-" + (today.getMonth()+1) + "-" + today.getFullYear()
     const assignment = new Assignment({
         _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
         text: req.body.text,
-        expiredata: req.body.data,
-        uploaddata:today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate()
+        name: req.body.name,
+        expireData: req.body.expireData,
+        uploadData: t,
+        studentId: req.body.studentId,
+        courseId: req.body.courseId
     })
 
     assignment
@@ -93,8 +96,7 @@ router.get('/:assignmentId',(req,res,next) =>{
 
 })
 
-
-router.delete('/assignment/:assignmentId', (req,res) =>{
+router.delete('/:assignmentId', (req,res) =>{
     const assignmentId = req.params.assignmentId
 	Assignment.deleteOne({_id: assignmentId})
 	.exec()

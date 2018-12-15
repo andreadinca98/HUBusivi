@@ -5,7 +5,7 @@ const usersRoutes = express.Router();
 const mongoose = require('mongoose');
 const Marks = require('../models/mark.js'); 
 
-//restituisce tuti gli studenti nel Database
+
 usersRoutes.get('/', (req,res,next) => {
 	Marks
 	.find()
@@ -29,9 +29,9 @@ usersRoutes.post('/', function (req, res) {
 
 	const marks = new Marks({
         _id: new mongoose.Types.ObjectId(),
-        mark:  req.body.marks,
-        id_marks:  req.body.id_marks,
-        courseId:  req.body.courseId				
+        mark:  req.body.mark,
+        studentId:  req.body.studentId,
+        assignmentId:  req.body.assignmentId				
 	});
 	
 	//.save mette tutto nel DB
@@ -46,14 +46,14 @@ usersRoutes.post('/', function (req, res) {
 	})
 	.catch(err => {
 		res.status(500).json({
-			message: "Studente non inserito",
+			message: "Voto non inserito",
 			error: err
 		});	
 	});
 });
 
 //Restituisce gli marks con quelli ID
-usersRoutes.get('/:marksId', (req,res,next) => {	
+/*usersRoutes.get('/:marksId', (req,res,next) => {	
 	const id = req.params.marksId;
 	Marks.findById(id)
 	.exec()
@@ -68,6 +68,26 @@ usersRoutes.get('/:marksId', (req,res,next) => {
 			error: err
 		});
 	});
+});*/
+
+//average 
+usersRoutes.get('/:assignmentId', (req,res,next) => {	
+	const assignmentid = req.params.assignmentId;
+	Marks.find({assignmentId: assignmentid}, function (err, foundMarks) {
+		if (err) {
+			console.log(err)
+			res.status(500).send();
+		}
+		else {
+			var i = 0;
+			var avg = 0;
+			for(i = 0; i<foundMarks.length; i++){
+				avg += foundMarks[i].mark;
+			}
+			avg = +(avg/i).toFixed(2);
+			res.json(avg)
+		}
+	})
 });
 
 //delete
@@ -105,7 +125,6 @@ usersRoutes.get('/:couseId', (req,res,next) => {
 		});
 	});
 });
-
 
 
 module.exports = usersRoutes;

@@ -20,12 +20,14 @@ teachersRoutes.get('/', (req,res,next) =>{
 		});
 	});
 });
-//Inserisci studente nel DB, andare in body di Postman 
+//Inserisci teacher nel DB, andare in body di Postman 
 //e aggiungere in linguaggio JSON email,nome e cognome
 teachersRoutes.post('/', function (req, res) {
 	const teacher = new Teacher({
 		_id : new mongoose.Types.ObjectId(),
-		name : req.body.name
+		email : req.body.email,
+		name: req.body.name,
+		password: req.body.password
 	});
 
 	//.save mette tutto nel DB
@@ -47,7 +49,7 @@ teachersRoutes.post('/', function (req, res) {
 		});
 	});
 
-	//Restituisce gli studenti con quelli ID
+	//Restituisce l'insegnanti con quel ID
 	teachersRoutes.get('/:teachersId', (req,res,next) => {	
 		const id = req.params.teachersId;
 		Teacher.findById(id)

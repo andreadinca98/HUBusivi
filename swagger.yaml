@@ -7,15 +7,15 @@ info:
     name: MIT
     url: https://github.com/apiaryio/polls-api/blob/master/LICENSE
 host: ingegneriasoftwa2.herokuapp.com
-basePath: /
+basePath: /api/v2
 schemes:
 - https
 consumes:
 - application/json
 produces:
 - application/json 
+
 paths:
-  
   /students:
     post:
       tags: 
@@ -23,11 +23,11 @@ paths:
       description: Adds a student on the database
       operationId: addStudent
       parameters:
-        - name: id_student
+        - name: id
           in: query
           description: id number of student
-          type: integer
-          x-exaple: 128888
+          type: string
+          x-exaple: "128888"
         - name: email
           in: query
           description: data of the student
@@ -38,7 +38,7 @@ paths:
           description: name of student
           type: string
           x-example: "Pinco"
-        - name: cognome
+        - name: surname
           in: query
           description: surname of student
           type: string
@@ -55,25 +55,35 @@ paths:
           description: Resources not found
         200:
           description: Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Students'
     
   
-  /students/studentId:
+  /students/{Id}:
+    parameters:
+        - name: Id
+          in: path
+          description: ID of the student to fetch
+          required: true
+          type: string
+          x-example: '1234'
     get:
       description: Returns a student from the database by ID
       operationId: getStudent
-      parameters:
-        - name: id_student
-          in: query
-          description: id of the student
-          type: integer
-          x-example: 198888
+      
       responses:
         400:
           description: Bad request
         404:
           description: Resources not found
         200:
-          description: Successful response
+          description: Successful Response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Students'
      
     delete:
       description: Removes a student from the database
@@ -99,7 +109,7 @@ paths:
       description: Adds a teacher
       operationId: Add Assignment
       parameters:
-        - name: id_teacher
+        - name: id
           in: query
           description: id of the teacher
           type: integer
@@ -135,7 +145,7 @@ paths:
       description: Returns a teacher from the database by ID
       operationId: getTeacher
       parameters:
-        - name: id_teacher
+        - name: id
           in: query
           description: id of the teacher
           type: integer
@@ -147,17 +157,23 @@ paths:
           description: Resources not found
         200:
           description: Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Teachers'
     
-  /teacher/teacherID:
+  /teacher/{Id}:
+    parameters:
+      - name: Id
+        in: path
+        description: ID of teacher to fetch
+        required: true
+        type: string
+        x-example: '1234'
+    
     get:
         description: Returns a teacher from the database by ID
         operationId: getSpecTeacher
-        parameters:
-          - name: id_teacher
-            in: query
-            description: teacher id
-            type: integer
-            x-example: 1
         responses:
           400:
             description: Bad request
@@ -165,6 +181,10 @@ paths:
             description: Resources not found
           200:
             description: Successful response
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/Teachers'
     
     delete:
       description: Removes a teacher from the database
@@ -190,7 +210,12 @@ paths:
         description: Adds an Assignment(only teacher)
         operationId: addAssignment
         parameters:
-          - name: assignment_name
+          - name: Id
+            in: query
+            description: id of the assignment
+            type: string
+            x-example: "123"
+          - name: name
             in: query
             description: name of the assignment
             type: string
@@ -200,11 +225,6 @@ paths:
             description: description of the assignment
             type: string
             x-example: "description"
-          - name: id_assignment
-            in: query
-            description: id of the assignment
-            type: string
-            x-example: "Compito Gennaio"
           - name: upload date
             in: query
             description: upload date of the assignment
@@ -228,34 +248,20 @@ paths:
             description: Resources not found
           200:
             description: Successful response
+            
 
-  /assignment/assignmentId:  
-    delete:
-      description: Removes an assignment
-      operationId: removeAssignment
-      parameters:
-        - name: id_assignment
-          in: query
-          description: id of the assignment
-          type: string
-          x-example: "124354"
-      responses:
-        400:
-          description: Bad request
-        404:
-          description: Resources not found
-        200:
-          description: Successful response  
-  
+  /assignment/{Id}:  
+    parameters:
+      - name: Id
+        in: path
+        description: ID of the assignment to fetch
+        required: true
+        type: string
+        x-example: '1234'
     put:
       description: Updates an assignment
       operationId: updateAssignment
       parameters:
-          - name: id_assignment
-            in: query
-            description: id of the assignment
-            type: string
-            x-example: "Compito Gennaio"
           - name: Delivery date
             in: query
             description: Delivery date of assignment
@@ -278,14 +284,25 @@ paths:
           description: Resources not found
         200:
           description: Successful response
-
+          
+    delete:
+      description: Removes an assignment
+      operationId: removeAssignment
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response  
+    
   /assignment/avg:
     post:
       description: >-
         Calculates the marks average about a specific assignment of a course(only teacher).
       operationId: avgMark
       parameters:
-        - name: assignmentID
+        - name: Id
           in: query
           description: Course which I want to get the average of marks
           type: integer
@@ -339,28 +356,6 @@ paths:
         200:
           description: Successful response
     
-    delete:
-      description: Removes a Mark of a specific exam of a student (only teacher)
-      operationId: removeMark
-      parameters:
-        - name: id_student
-          in: query
-          description: matricola of the student
-          type: integer
-          x-example: 123456
-        - name: id_course
-          in: query
-          description: course id of the mark
-          type: integer
-          x-example: 113355
-      responses:
-        400:
-          description: Bad request
-        404:
-          description: Resources not found
-        200:
-          description: Successful response
-
     put:
       description: Updates a mark of a specific exam of a student (only teacher)
       operationId: updateMark
@@ -387,6 +382,30 @@ paths:
           description: Resources not found
         200:
           description: Successful response
+    
+    delete:
+      description: Removes a Mark of a specific exam of a student (only teacher)
+      operationId: removeMark
+      parameters:
+        - name: id_student
+          in: query
+          description: matricola of the student
+          type: integer
+          x-example: 123456
+        - name: id_course
+          in: query
+          description: course id of the mark
+          type: integer
+          x-example: 113355
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+
+    
   
   /marks/courseId:
     get:
@@ -416,7 +435,7 @@ paths:
       description: Adds a course(teacher)/Join a course(student)
       operationId: addCourse
       parameters:
-        - name: id_course
+        - name: Id
           in: query
           description: course data
           type: string
@@ -435,7 +454,7 @@ paths:
       description: Gets the list of all your courses
       operationId: coursesList
       parameters:
-        - name: id_student
+        - name: Id
           in: query
           description: id of the student
           type: integer
@@ -447,26 +466,20 @@ paths:
           description: Resources not found
         200:
           description: List of all your courses
+          schema:
+              type: array
+              items:
+                $ref: '#/definitions/Courses'
 
 
-  /courses/courseId:  
-    delete:
-      description: Removes a course(teacher only)/Leave a course(student only)
-      operationId: removeCourse
-      parameters:
-        - name: id_course
-          in: query
-          description: Course which I want to delete/leave
-          type: integer
-          x-example: 113355
-      responses:
-        400:
-          description: Bad request
-        404:
-          description: Resources not found
-        200:
-          description: Successful response
-  
+  /courses/{Id}:  
+    parameters:
+      - name: Id
+        in: path
+        description: ID of courses to fetch
+        required: true
+        type: string
+        x-example: '1234'
     put:
       description: Updates a Course(teacher only)
       operationId: updateCourse
@@ -508,3 +521,119 @@ paths:
           description: Resources not found
         200:
           description: Successful response
+          
+    delete:
+      description: Removes a course(teacher only)/Leave a course(student only)
+      operationId: removeCourse
+      
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+  
+    
+
+definitions:
+  Students:
+    type: object
+    properties:
+      id:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+      surname:
+        type: string
+      password:
+        type: string
+    required:
+      - id
+      - email
+      - name
+      - surname
+      - password
+    example:
+      id: 12345
+      email: stefano@gmail.com
+      name: Stefano
+      surname: Pretto
+      password: stefano
+  Teachers:
+    type: object
+    properties:
+      id:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    required:
+      - id
+      - email
+      - name
+      - password
+    example:
+      id: 12345
+      email: marco@gmail.com
+      name: marco
+      password: marco
+  Assignment:
+    type: object
+    properties:
+      id:
+        type: string
+      text:
+        type: string
+      name:
+        type: string
+      expireData:
+        type: string
+      uploadData:
+        type: string
+      studentId:
+        type: string
+      courseId:
+        type: string
+    required:
+      - id
+      - text
+      - name
+      - expireData
+      - uploadData
+      - studentId
+      - courseId
+    example:
+      id: 12345
+      text: Risolvi l'integrale
+      name: Analisi
+      expireData: 13-12-2018
+      uploadData: 11-12-2018
+      studentId: 123
+      courseId: 1234
+  Courses:
+    type: object
+    properties:
+      s_id:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+      t_id:
+        type: string
+    required:
+      - s_id
+      - description
+      - name
+      - t_id
+    example:
+      s_id: 12345
+      description: Informatica+Economia
+      name: INF ORG
+      t_id: 123456

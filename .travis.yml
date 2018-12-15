@@ -11,4 +11,3 @@ install:
   - "npm install --no-optional"
 before_script:
   - "npm info dredd version"
-© 2018 GitHub, Inc.
