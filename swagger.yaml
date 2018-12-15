@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   version: '1.0'
   title: "HUBusivi"
-  description: REST Api to manage the exams
+  description: REST Api to manage 
   license:
     name: MIT
     url: https://github.com/apiaryio/polls-api/blob/master/LICENSE
@@ -14,10 +14,18 @@ consumes:
 - application/json
 produces:
 - application/json 
+securityDefinitions:
+  Authentions:
+    description: For access to every page 
+    type: apiKey
+    name: Authorization
+    in: header
 
 paths:
   /students:
     post:
+      security:
+        - Authentions: []
       tags: 
       - "Students"
       description: Adds a student on the database
@@ -102,8 +110,34 @@ paths:
         200:
           description: Successful response
   
+  /courses/{studentId}:
+    parameters:
+          - name: studentId
+            in: path
+            description: ID of the student to fetch
+            required: true
+            type: string
+            x-example: '1234'
+    get:
+      description: Returns all courses of studentId
+      operationId: get
+      
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful Response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Students'
+  
   /teacher:
     post:
+      security:
+        - Authentions: []
       tags:
       - "Teacher"
       description: Adds a teacher
@@ -163,6 +197,7 @@ paths:
               $ref: '#/definitions/Teachers'
     
   /teacher/{Id}:
+    
     parameters:
       - name: Id
         in: path
@@ -171,20 +206,20 @@ paths:
         type: string
         x-example: '1234'
     
-    get:
-        description: Returns a teacher from the database by ID
-        operationId: getSpecTeacher
-        responses:
-          400:
-            description: Bad request
-          404:
-            description: Resources not found
-          200:
-            description: Successful response
-            schema:
-              type: array
-              items:
-                $ref: '#/definitions/Teachers'
+    get:   
+      description: Returns a teacher from the database by ID
+      operationId: getSpecTeacher
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Teachers'
     
     delete:
       description: Removes a teacher from the database
@@ -637,3 +672,10 @@ definitions:
       description: Informatica+Economia
       name: INF ORG
       t_id: 123456
+      
+responses:
+  UnauthorizedError:
+    description: API key is missing or invalid
+    headers:
+      WWW_Authenticate:
+        type: string
