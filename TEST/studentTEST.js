@@ -1,5 +1,5 @@
 const assert =require('chai').assert;
-const student = require('../student');
+const student = require('../routes/students');
 
 describe('Student', function(){
     it('Dovrebbe ritornare....', function(){
