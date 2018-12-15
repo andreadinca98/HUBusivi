@@ -25,6 +25,7 @@
     "mongo": "^0.1.0",
     "mongodb": "^3.1.10",
     "mysql": "^2.16.0",
+    "nodemon": "^1.18.7",
     "uniqid": "^5.0.3"
   },
   "devDependencies": {
@@ -32,10 +33,6 @@
     "mocha": "^5.2.0",
     "mongoose": "^5.3.14",
     "morgan": "^1.9.1",
-    "mysql": "^2.16.0",
-    "nodemon": "^1.18.7",
-    "uniqid": "^5.0.3",
     "url": "^0.11.0"
   }
-
 }
