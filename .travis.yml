@@ -15,14 +15,14 @@
 #   - make test
 language: node_js
 node_js:
-  - 'stable'
+  - '8'
 deploy:
   provider: heroku
   api_key:
     secure: $HEROKU_KEY
   app:
     develop: is2-authentication-develop
-#install:
- # - "npm install --no-optional"
-#before_script:
- # - "npm info dredd version"
+install:
+  - "npm install --no-optional"
+before_script:
+  - "npm info dredd version"
