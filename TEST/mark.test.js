@@ -16,3 +16,11 @@ describe('POST Marks', function(){
         done();
     })
 })
+
+describe('DELETE Marks', function(){
+    it("returns status 200", function(done){
+        request(mark).delete("/")
+            .expect(200);
+        done();
+    })
+})

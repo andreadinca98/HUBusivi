@@ -16,3 +16,11 @@ describe('POST Teacher', function(){
         done();
     })
 })
+
+describe('DELETE Teacher', function(){
+    it("returns status 200", function(done){
+        request(teacher).delete("/")
+            .expect(200);
+        done();
+    })
+})
