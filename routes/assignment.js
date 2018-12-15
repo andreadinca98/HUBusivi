@@ -21,29 +21,17 @@ router.get('/', function(req, res){
 		})
 })
 
-router.get('/assignment/:studentId', (req,res) =>{
-    console.log('Getting assignment')
-    const sId = req.params.studentId;
-	    
-    Assignment.findOne({studentid: sId})
-    .exec(function(err, courses){
-        if(err){
-            res.end('Error has occured')
-        }
-        else{
-            console.log('List of courses')
-            res.json(courses)
-			}
-    })
-    .then(result => {
-		res.status(200).json(result);
-	})
-	.catch(err => {
-		console.log(err);
-		res.status(500).json({
-			message: "Errore lista assignment",
-			error: err
-		})
+//funzione per ricevere solo i corsi disponibili dallo studente
+router.get('/:studentId', function (req, res) {
+	console.log('Getting courses for id')
+	Assignment.find({ $and: [{ studentId: req.params.studentId }, { active: true }] }, function (err, foundAssignments) {
+		if (err) {
+			console.log(err)
+			res.status(500).send();
+		}
+		else {
+			res.json(foundAssignments)
+		}
 	})
 })
 
@@ -77,23 +65,25 @@ router.post('/', (req,res) =>{
     })
 })
 
-router.get('/:assignmentId',(req,res,next) =>{
-    const id = req.params.assignmentId;
-    Assignment
-    .findOne({_id: id})
-	.exec()
-	.then(doc => {		
-		console.log(doc),		
-		res.status(200).json(doc)
-	})
-	.catch(err => {
-		console.log(err);
-		res.status(500).json({
-			message: "Non è stato trovato l'assignment",
-			error: err
-		});
-	});
-
+//funzione che cambia active a falso se oggi è scaduto l'assigment
+router.put('/', (req,res) =>{
+    const today = new Date();
+    const t = today.getDate() + "-" + (today.getMonth()+1) + "-" + today.getFullYear();
+    Assignment.find({}, function(err, foundAssignments){
+        if (err) {
+			console.log(err)
+			res.status(500).send();
+        }
+        else {
+			for(var i = 0; i<foundAssignments.length; i++){
+				if(!t.localeCompare(foundAssignments[i].expireData)){
+                    foundAssignments[i].active = false;
+                    foundAssignments[i].save();
+                }
+            }
+            res.json(foundAssignments);            
+		}
+    })
 })
 
 router.delete('/:assignmentId', (req,res) =>{
