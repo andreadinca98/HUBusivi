@@ -8,7 +8,9 @@ deploy:
   app:
     develop: is2-authentication-develop
 install:
-  - "npm install --no-optional"
+  - "npm install"
 before_script:
   - "npm info dredd version"
   - "cd TEST"
+script:
+  - make test
