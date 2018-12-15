@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "node"
+  - '8'
 deploy:
   provider: heroku
   api_key:
@@ -11,6 +11,3 @@ install:
   - "npm install --no-optional"
 before_script:
   - "npm info dredd version"
-script:
-  - npm test
-  after_success: npm run coverage
