@@ -3,11 +3,11 @@ const jwt     = require('jsonwebtoken'); // used to create, sign, and verify tok
 const config = require('../config.js'); // get our config file
 const Student = require('../models/student.js');
 const Teacher = require('../models/teacher.js');
+const url = require('url')
 
 const authenticationRouter = express.Router(); 
 
 authenticationRouter.post('/', async function(req, res) {
-	console.log("fads")
 	// find the user
 	var user = null
 	if(req.body.type == "student"){
@@ -34,22 +34,35 @@ authenticationRouter.post('/', async function(req, res) {
 			// create a token
 			var payload = {
 				id: user.id,
-				name: user.name,
-				admin: user.admin
+				name: user.name
 			}
 			var options = {
 				expiresIn: 86400 // expires in 24 hours
 			}
 			var token = jwt.sign(payload, config.superSecret, options);
 			if(req.body.type == "student"){
-				token += "s";
+				res.redirect(url.format({
+					pathname: "/api/v2/checker",
+					query: {
+						"id" : user.id,
+						"t" : "s",
+						"token" : token
+					}
+				}))
 			}
 			if(req.body.type == "teacher"){
-				token += "t";	
+				res.redirect(url.format({
+					pathname: "/api/v2/checker",
+					query: {
+						"id" : user.id,
+						"t" : "t",
+						"token" : token
+					}
+				}))	
 			}
 			
 			// signed in
-			res.redirect('/courses/'+ user.id)
+			//res.redirect('/courses/'+ user.id)
 		}
 
 	}

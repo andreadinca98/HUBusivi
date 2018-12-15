@@ -5,7 +5,7 @@
   "main": "api.js",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/*.js"
   },
   "repository": {
     "type": "git",
@@ -19,17 +19,22 @@
   "homepage": "https://github.com/andreadinca98/ProgettoIS2#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
     "express": "^4.16.4",
+    "heroku": "^7.19.3",
     "jsonwebtoken": "^8.4.0",
+    "mocha": "^5.2.0",
     "mongo": "^0.1.0",
     "mongodb": "^3.1.10",
+    "mongoose": "^5.3.14",
+    "mongose": "0.0.2-security",
+    "morgan": "^1.9.1",
     "mysql": "^2.16.0",
+    "nodemon": "^1.18.7",
     "uniqid": "^5.0.3",
-    "nodemon": "^1.18.7"
+    "supertest": "^3.3.0",
+    "url": "^0.11.0"
   },
   "devDependencies": {
-    "heroku": "^7.19.3",
-    "mongoose": "^5.3.14",
-    "morgan": "^1.9.1"
   }
 }
