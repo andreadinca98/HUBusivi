@@ -1,5 +1,6 @@
 var request = require('supertest')
 var course = require('../routes/courses');
+var student = require('../routes/students');
 
 describe('GET Course', function(){
     it("returns status 200", function(done) {
@@ -34,11 +35,16 @@ describe('RESEARCH on Course by Student Id', function(){
 })
 */
 
-describe('RESEARCH on Course by Student Id', function() {
-    describe('#find()', function() {
-      it('should save return all the user with this course', function(done) {
-        var user = new User('Luna');
-        student.find(done);
-      });
-    });
-  });
+describe('RESEARCH on Course by User Id', function(){
+    it("returns status 500", function(done){
+        request(course).get("/aaaa")
+            .expect(500);
+        done();
+    })
+    it("returns status 200",function(done){
+        request(course).get("/5c07d66106ea3145c4b9bc1c")
+            .expect(200);
+        done();
+    })
+
+})

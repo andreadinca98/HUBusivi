@@ -17,8 +17,8 @@ const tokenChecker = function(req, res, next) {
 			} else {
 				// if everything is good, save to request for use in other routes
 				req.user = decoded;
-				var t = req.query.t
-				var s = req.query.id
+				var t = req.params.t
+				var s = req.params.id
 				console.log('\n\n'+s+'\n\n')
 
 				if(t == "s"){

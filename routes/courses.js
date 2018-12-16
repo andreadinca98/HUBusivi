@@ -41,8 +41,7 @@ coursesRouter.get('/:userId', function (req, res) {
             res.status(500).send();
         }
         else {
-
-            res.json(foundCourses)
+			res.status(200).json(foundCourses)
 
         }
     })

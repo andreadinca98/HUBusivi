@@ -8,3 +8,6 @@ div{
     margin: 20 px;
     position: sticky
 }
+input{
+    position: relative;
+}
