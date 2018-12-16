@@ -43,7 +43,7 @@ authenticationRouter.post('/', async function(req, res) {
 			if(req.body.type == "student"){
 				res.redirect(url.format({
 					pathname: "/api/v2/checker",
-					query: {
+					query : {
 						"id" : user.id,
 						"t" : "s",
 						"token" : token
@@ -53,7 +53,7 @@ authenticationRouter.post('/', async function(req, res) {
 			if(req.body.type == "teacher"){
 				res.redirect(url.format({
 					pathname: "/api/v2/checker",
-					query: {
+					body: {
 						"id" : user.id,
 						"t" : "t",
 						"token" : token
@@ -61,8 +61,6 @@ authenticationRouter.post('/', async function(req, res) {
 				}))	
 			}
 			
-			// signed in
-			//res.redirect('/courses/'+ user.id)
 		}
 
 	}
