@@ -12,6 +12,7 @@ const routerStudent = require('./routes/students.js')
 const routerTeacher = require('./routes/teachers.js')
 const routerAssignment = require('./routes/assignment.js')
 const routerMarks = require('./routes/marks.js')
+const routercouseStudent = require('./routes/courseStudent.js')
 const routerCourses = require('./routes/courses.js')
 const routerAuthentication = require('./routes/authentications.js');
 const routerApis = require('./routes/apis.js');
@@ -37,6 +38,7 @@ app.use('/api/v2/authentications', routerAuthentication)
 app.use('/api/v2/assignments', routerAssignment)
 app.use('/api/v2/apis', routerApis)
 app.use('/api/v2/checker', routerCheck)
+app.use('/api/v2/courseStudent', routercouseStudent)
 
 app.get('/', (req, res) => {
     //res.writeHead(200, {"Content-Type": "text/html"}); 
@@ -47,9 +49,12 @@ app.listen(PORT, () => console.log('Example app listening on port: ' + PORT))
 
 app.get('/api/v2/addAssignment', (req, res) => {
     //res.writeHead(200, {"Content-Type": "text/html"}); 
-    res.sendFile(path.join(__dirname + '/public/addAssignment'))
+    res.sendFile(path.join(__dirname + '/public/addAssignment.html'))
 })
-
+app.get('/api/v2/addMarks', (req, res) => {
+    //res.writeHead(200, {"Content-Type": "text/html"}); 
+    res.sendFile(path.join(__dirname + '/public/addMarks.html'))
+})
 //ERRORI: se non è stato fatto nulla di quello sopra allora darà un errore
 app.use((req,res,next)=>{
     const error = new Error('Page not found');

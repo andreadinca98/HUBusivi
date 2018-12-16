@@ -53,7 +53,7 @@ authenticationRouter.post('/', async function(req, res) {
 			if(req.body.type == "teacher"){
 				res.redirect(url.format({
 					pathname: "/api/v2/checker",
-					body: {
+					query: {
 						"id" : user.id,
 						"t" : "t",
 						"token" : token

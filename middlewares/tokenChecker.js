@@ -17,8 +17,8 @@ const tokenChecker = function(req, res, next) {
 			} else {
 				// if everything is good, save to request for use in other routes
 				req.user = decoded;
-				var t = req.params.t
-				var s = req.params.id
+				var t = req.query.t
+				var s = req.query.id
 				console.log('\n\n'+s+'\n\n')
 
 				if(t == "s"){
@@ -27,6 +27,7 @@ const tokenChecker = function(req, res, next) {
 						body: {
 							"token" : token
 						}
+						res.sendFile(path.join(__dirname + '/public/addAssignment'))
 					}))*/
 					res.writeHead(200, {"Content-Type": "text/html"}); 
    					res.end('<p><html><body><h1>User home page </h1><hr><form action= \"/api/v2/assignments/'+ s +'\" method=\"GET\"><button>Visualizza gli assignment</button></form>'+
@@ -43,6 +44,9 @@ const tokenChecker = function(req, res, next) {
 					res.writeHead(200, {"Content-Type": "text/html"}); 
 					res.end('<p><html><body><h1>User home page </h1><hr><form action= \"/api/v2/assignments/'+ s +'\" method=\"GET\"><button>Visualizza gli assignment</button></form>'+
 						 '<form action= \"/api/v2/courses/' + s + '\" method=\"GET\"><button>Visualizza i corsi</button></form>'+
+						 '<form action= \"/api/v2/addAssignment\" method=\"GET\"><button>Carica assignment</button></form>'+
+						 '<form action= \"/api/v2/addMarks\" method=\"GET\"><button>Carica voto</button></form>'+
+						 '<form action= \"/api/v2/courseStudent\" method=\"GET\"><button>Studenti-corsi</button></form>'+
 						 '<form action= \"/api/v2/marks/' + s + '\" method=\"GET\"><button>Visualizza i voti</button></form></body></html></p>');
 				}				
 			}
