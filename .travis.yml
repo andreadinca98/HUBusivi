@@ -15,7 +15,9 @@
 #   - make test
 language: node_js
 node_js:
-  - '8'
+  - 6
+  - 8
+  - 10
 deploy:
   provider: heroku
   api_key:
@@ -23,6 +25,20 @@ deploy:
   app:
     develop: is2-authentication-develop
 install:
-  - "npm install --no-optional"
+   — npm install phantomjs -g
+   — npm install -g mocha-phantomjs
+   — npm install -g gulp
+   — npm install -g bower
+   — npm install
+   — bower install
+   — npm install -g npm@2
 before_script:
-  - "npm info dredd version"
+ — phantomjs —version
+ — mocha-phantomjs —version
+ — gulp &
+ — sleep 5 # give gulp background task some time to execute.
+script:
+ — mocha-phantomjs out/test/index.html
+ — make test
+
+after_success: npm run coverage
