@@ -44,7 +44,7 @@ router.post('/', (req,res) =>{
         name: req.body.name,
         expireData: req.body.expireData,
         uploadData: t,
-        studentId: req.query.id,
+        studentId: req.headers.studentId,
         courseId: req.body.courseId,
         complete: req.body.complete
     })
