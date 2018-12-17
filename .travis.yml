@@ -15,9 +15,7 @@
 #   - make test
 language: node_js
 node_js:
-  - 6
-  - 8
-  - 10
+  - '8'
 deploy:
   provider: heroku
   api_key:
@@ -25,14 +23,6 @@ deploy:
   app:
     develop: is2-authentication-develop
 install:
-   — npm install -g npm@2
+  - "npm install"
 before_script:
- — phantomjs —version
- — mocha-phantomjs —version
- — gulp &
- — sleep 5 # give gulp background task some time to execute.
-script:
- — mocha-phantomjs out/test/index.html
- — make test
-
-after_success: npm run coverage
+  - "npm info dredd version"
