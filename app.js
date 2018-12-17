@@ -55,6 +55,10 @@ app.get('/api/v2/addMarks', (req, res) => {
     //res.writeHead(200, {"Content-Type": "text/html"}); 
     res.sendFile(path.join(__dirname + '/public/addMarks.html'))
 })
+app.get('/api/v2/uploadAssignment/:id', (req, res) => {
+    //res.writeHead(200, {"Content-Type": "text/html"}); 
+    res.sendFile(path.join(__dirname + '/public/uploadAssignment.html'))
+})
 //ERRORI: se non è stato fatto nulla di quello sopra allora darà un errore
 app.use((req,res,next)=>{
     const error = new Error('Page not found');

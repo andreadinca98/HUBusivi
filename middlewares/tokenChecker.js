@@ -32,6 +32,7 @@ const tokenChecker = function(req, res, next) {
 					res.writeHead(200, {"Content-Type": "text/html"}); 
    					res.end('<p><html><body><h1>User home page </h1><hr><form action= \"/api/v2/assignments/'+ s +'\" method=\"GET\"><button>Visualizza gli assignment</button></form>'+
 							'<form action= \"/api/v2/courses/' + s + '\" method=\"GET\"><button>Visualizza i corsi</button></form>'+
+							'<form action= \"/api/v2/uploadAssignment/' + s + '\" method=\"GET\"><button>Carica un assignment completato</button></form>'+
 							'<form action= \"/api/v2/marks/' + s + '\" method=\"GET\"><button>Visualizza i voti</button></form></body></html></p>');
 					}
 				if(t == "t"){
