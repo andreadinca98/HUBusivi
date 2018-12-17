@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/andreadinca98/HUBusivi.svg?branch=master)](https://travis-ci.org/andreadinca98/HUBusivi)
+
 <b>Data di inizio del progetto:</b>
 
 30 ottobre 2018
