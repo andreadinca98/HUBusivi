@@ -7,6 +7,9 @@
     "start": "nodemon app.js",
     "test": "mocha ./test/*.test.js"
   },
+  "mocha.options": {
+    "opts": "mocha.opts"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andreadinca98/ProgettoIS2.git"

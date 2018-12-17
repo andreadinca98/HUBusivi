@@ -23,4 +23,8 @@ describe('DELETE Teacher', function(){
             .expect(200);
         done();
     })
+    after(function(){
+        process.exit(0)
+    })
+
 })
