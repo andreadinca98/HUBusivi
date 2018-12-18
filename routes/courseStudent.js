@@ -25,35 +25,31 @@ router.get('/', function(req, res){
 })
 
 //funzione per ricevere solo i corsi disponibili dallo studente
-router.get('/:studentId', function (req, res) {
+router.get('/:courseId', function (req, res) {
 	console.log('Getting courses for id')
-	coursestudent.find({ $or: [{ s_id: req.params.userId }, { t_id: req.params.userId }] }, function (err, foundAssignments){
+	coursestudent.find({courseId: req.params.courseId}, function (err, foundCourse){
 		if (err) {
 			console.log(err)
 			res.status(500).send();
 		}
 		else {
-			res.json(foundAssignments)
+			res.json(foundCourse);
 		}
 	})
 })
-/*
-router.post('/', (req,res) =>{
-    const today = new Date();
-    const t = today.getDate() + "-" + (today.getMonth()+1) + "-" + today.getFullYear()
-    const assignment = new Assignment({
-        studentId: 
-        courseId: 
-        assignmentId:
-    })
 
-    assignment
+router.post('/', (req,res) =>{
+	const cStudent = new coursestudent({
+        studentId: req.body.studentId,
+        courseId: req.body.courseId
+    })
+    cStudent
     .save()
     .then(result => {
         console.log(result)
         res.status(201).json({
             message: 'Handling POST requests to /assignment',
-            createAssignment: result
+            createcStudent: result
         })
     })
     .catch(err => {
@@ -63,44 +59,5 @@ router.post('/', (req,res) =>{
         })
     })
 })
-
-//funzione che cambia active a falso se oggi è scaduto l'assigment
-router.put('/', (req,res) =>{
-    const today = new Date();
-    const t = today.getDate() + "-" + (today.getMonth()+1) + "-" + today.getFullYear();
-    coursestudent.find({}, function(err, foundAssignments){
-        if (err) {
-			console.log(err)
-			res.status(500).send();
-        }
-        else {
-			for(var i = 0; i<foundAssignments.length; i++){
-				if(!t.localeCompare(foundAssignments[i].expireData)){
-                    foundAssignments[i].active = false;
-                    foundAssignments[i].save();
-                }
-            }
-            res.json(foundAssignments);            
-		}
-    })
-})
-
-
-router.delete('/:assignmentId', (req,res) =>{
-    const assignmentId = req.params.assignmentId
-	coursestudent.deleteOne({_id: assignmentId})
-	.exec()
-	.then(result => {
-		res.status(200).json(result);
-	})
-	.catch(err => {
-		console.log(err);
-		res.status(500).json({
-			message: "Assignment non rimosso",
-			error: err
-		})
-	})
-	
-})*/
 
 module.exports = router

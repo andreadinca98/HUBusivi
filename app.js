@@ -28,8 +28,6 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//quello che fa nella pagina localhost:3000 -> Hello World!
-
 //vari routers alle varie pagine 
 app.use('/api/v2/students',routerStudent);
 app.use('/api/v2/teachers',routerTeacher)
