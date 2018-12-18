@@ -1,8 +1,3 @@
-const request = require('supertest');
-const jwt     = require('jsonwebtoken'); // used to create, sign, and verify tokens
-const config  = require('../config.js'); // get our config file
-const app     = require('../app');
-
 var request = require('supertest')
 var teacher = require('../routes/students');
 var jwt = require('jsonwebtoken')
