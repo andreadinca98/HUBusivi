@@ -23,12 +23,16 @@ authenticationRouter.post('/', async function(req, res) {
 	
 	if (!user) {
 		// user not found
-		res.json({ success: false, message: 'Authentication failed. User not found.' });		
+		//res.json({ success: false, message: 'Authentication failed. User not found.' });
+		res.writeHead(200, {"Content-Type": "text/html"}); 
+		res.end('<p><html><body><h1>Autenticazione fallita. Utente non trovato!</h1><form action= \"/\" method=\"GET\"><button>Torna al login</button></form></body></html></p>');
 	} else {
 		// check if password matches
 		if (user.password != req.body.password) {
 			// wrong password
-			res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+			//res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+			res.writeHead(200, {"Content-Type": "text/html"}); 
+			res.end('<p><html><body><h1>Autenticazione fallita. Password errata!</h1><form action= \"/\" method=\"GET\"><button>Torna al login</button></form></body></html></p>');
 		} else {
 			// if user is found and password is right
 			// create a token

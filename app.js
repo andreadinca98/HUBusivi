@@ -56,6 +56,20 @@ app.get('/api/v2/addMarks', (req, res) => {
 app.get('/api/v2/addUser', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/addUser.html'))
 })
+app.get('/api/v2/addStudent', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/addStudent.html'))
+})
+app.get('/api/v2/removeStudent', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/removeStudent.html'))
+})
+app.get('/api/v2/removeTeacher', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/removeTeacher.html'))
+})
+
+app.get('/api/v2/uploadAssignment/:studentId', (req, res) => {
+    //res.writeHead(200, {"Content-Type": "text/html"}); 
+    res.sendFile(path.join(__dirname + '/public/uploadAssignment.html'))
+})
 
 app.post('/api/v2/control', (req, res) => {
     console.log("22222")
@@ -72,8 +86,6 @@ app.post('/api/v2/control', (req, res) => {
 	if(req.body.type == "teacher"){
 	}
 })
-
-
 
 //ERRORI: se non è stato fatto nulla di quello sopra allora darà un errore
 app.use((req,res,next)=>{

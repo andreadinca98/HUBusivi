@@ -46,5 +46,4 @@ describe('RESEARCH on Course by User Id', function(){
             .expect(200);
         done();
     })
-
 })

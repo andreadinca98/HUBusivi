@@ -1,10 +1,17 @@
 <html>
+    <header>
+        <script>
+            var pathname = window.location.pathname;
+            console.log(pathname);
+        </script>
+    </header>
     <body>
         Upload a completed assignment <br/><hr>
-        <form action= "/api/v2/assignment" method="POST">
+        <form action= "/api/v2/assignments" method="POST">
             Assignment id: <input type = "text" name = "tAssignment"><br><br>
-            Student id: <input type = "text" name = "tStudent"><br><br>
+            <!----Student id: <input type = "text" name = "tStudent"><br><br>--->
             Text: <input type = "text" name = "text"><br><br> 
+            <input type ="text" name ="complete" value="true" style="visibility: hidden" ><br>
             <button>Create</button>
         </form>
     </body>

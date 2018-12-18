@@ -5,7 +5,10 @@
   "main": "api.js",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "mocha"
+    "test": "mocha ./test/*.test.js"
+  },
+  "mocha.options": {
+    "opts": "mocha.opts"
   },
   "repository": {
     "type": "git",
@@ -31,6 +34,7 @@
     "morgan": "^1.9.1",
     "mysql": "^2.16.0",
     "nodemon": "^1.18.7",
+    "travis": "^0.1.1",
     "uniqid": "^5.0.3",
     "url": "^0.11.0"
   },
