@@ -30,6 +30,7 @@ router.get('/:studentId', function (req, res) {
 			res.status(500).send();
 		}
 		else {
+            console.log(req.query.token)
 			res.json(foundAssignments)
 		}
 	})

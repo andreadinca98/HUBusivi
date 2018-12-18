@@ -25,18 +25,41 @@ router.get('/', function(req, res){
 })
 
 //funzione per ricevere solo i corsi disponibili dallo studente
-router.get('/:studentId', function (req, res) {
+router.get('/:courseId', function (req, res) {
 	console.log('Getting courses for id')
-	coursestudent.find({ $or: [{ s_id: req.params.userId }, { t_id: req.params.userId }] }, function (err, foundAssignments){
+	coursestudent.find({courseId: req.params.courseId}, function (err, foundCourse){
 		if (err) {
 			console.log(err)
 			res.status(500).send();
 		}
 		else {
-			res.json(foundAssignments)
+			res.json(foundCourse);
 		}
 	})
 })
+
+router.post('/', (req,res) =>{
+	const cStudent = new coursestudent({
+        studentId: req.body.studentId,
+        courseId: req.body.courseId
+    })
+    cStudent
+    .save()
+    .then(result => {
+        console.log(result)
+        res.status(201).json({
+            message: 'Handling POST requests to /assignment',
+            createcStudent: result
+        })
+    })
+    .catch(err => {
+        res.status(500).json({
+            message: "Assignment non aggiunto",
+            error: err
+        })
+    })
+})
+
 /*
 router.post('/', (req,res) =>{
     const today = new Date();

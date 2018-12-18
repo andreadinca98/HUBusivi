@@ -1,10 +1,9 @@
 <html>
     <body>
         Add an assignment <br/><hr>
-        <form action= "/api/v2/mark_student" method="POST">
-            Student id: <input type = "text" name = "sId"><br><br>
-            Assignment id: <input type = "text" name = "sAssignment"><br><br> 
-            Course id: <input type = "text" name = "sCourse"><br><br> 
+        <form action= "/api/v2/marks" method="POST">
+            Student id: <input type = "text" name = "studentId"><br><br>
+            Assignment id: <input type = "text" name = "assignmentId"><br><br>
             Voto: <input type = "number" max="30" min="0" name = "mark">
             <button>Create</button>
         </form>

@@ -19,14 +19,14 @@ const tokenChecker = function(req, res, next) {
 				req.user = decoded;
 				var t = req.query.t
 				var s = req.query.id
-				console.log('\n\n'+s+'\n\n')
+				var token = req.query.token
 
 				if(t == "s"){
 					res.writeHead(200, {"Content-Type": "text/html"}); 
-   					res.end('<p><html><body><h1>User home page </h1><hr><form action= \"/api/v2/assignments/'+ s +'\" method=\"GET\"><button>Visualizza gli assignment</button></form>'+
-							'<form action= \"/api/v2/courses/' + s + '\" method=\"GET\"><button>Visualizza i corsi</button></form>'+
-							'<form action= \"/api/v2/uploadAssignment/' + s + '\" method=\"GET\"><button>Carica un assignment completato</button></form>'+
-							'<form action= \"/api/v2/marks/' + s + '\" method=\"GET\"><button>Visualizza i voti</button></form></body></html></p>');
+   					res.end('<p><html><body><h1>User home page </h1><hr><form action= \"/api/v2/assignments/'+ s +'?token='+token+'\" method=\"GET\"><button>Visualizza gli assignment</button></form>'+
+							'<form action= \"/api/v2/courses/' + s + '?token='+token+'\" method=\"GET\"><button>Visualizza i corsi</button></form>'+
+							'<form action= \"/api/v2/uploadAssignment/' + s + '?token='+token+'\" method=\"GET\"><button>Carica un assignment completato</button></form>'+
+							'<form action= \"/api/v2/marks/' + s + '?token='+token+'\" method=\"GET\"><button>Visualizza i voti</button></form></body></html></p>');
 					}
 				if(t == "t"){
 					/*res.redirect(url.format({
@@ -36,12 +36,12 @@ const tokenChecker = function(req, res, next) {
 						}
 					}))*/
 					res.writeHead(200, {"Content-Type": "text/html"}); 
-					res.end('<p><html><body><h1>User home page </h1><hr><form action= \"/api/v2/assignments/'+ s +'\" method=\"GET\"><button>Visualizza gli assignment</button></form>'+
-						 '<form action= \"/api/v2/courses/' + s + '\" method=\"GET\"><button>Visualizza i corsi</button></form>'+
-						 '<form action= \"/api/v2/addAssignment\" method=\"GET\"><button>Carica assignment</button></form>'+
-						 '<form action= \"/api/v2/addMarks\" method=\"GET\"><button>Carica voto</button></form>'+
-						 '<form action= \"/api/v2/courseStudent\" method=\"GET\"><button>Studenti per corso</button></form>'+
-						 '<form action= \"/api/v2/marks/' + s + '\" method=\"GET\"><button>Visualizza i voti</button></form></body></html></p>');
+					res.end('<p><html><body><h1>User home page </h1><hr><form action= \"/api/v2/assignments/'+ s +'?token='+token+'\" method=\"GET\"><button>Visualizza gli assignment</button></form>'+
+						 '<form action= \"/api/v2/courses/' + s + '?token='+token+'\" method=\"GET\"><button>Visualizza i corsi</button></form>'+
+						 '<form action= \"/api/v2/addAssignment?token='+token+'\" method=\"GET\"><button>Carica assignment</button></form>'+
+						 '<form action= \"/api/v2/addMarks?token='+token+'\" method=\"GET\"><button>Carica voto</button></form>'+
+						 '<form action= \"/api/v2/students?token='+token+'\" method=\"GET\"><button>Visualizza studenti</button></form>'+
+						 '<form action= \"/api/v2/marks/' + s + '?token='+token+'\" method=\"GET\"><button>Visualizza i voti</button></form></body></html></p>');
 				}				
 			}
 		});

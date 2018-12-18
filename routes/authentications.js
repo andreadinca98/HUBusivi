@@ -4,8 +4,13 @@ const config  = require('../config.js'); // get our config file
 const Student = require('../models/student.js');
 const Teacher = require('../models/teacher.js');
 const url 	  = require('url')
+const cookieParser = require('cookie-parser')
 
-const authenticationRouter = express.Router(); 
+/*
+res.cookie(name_of_cookie, value_of_cookie);
+
+authenticationRouter.use(cookieParser()) */
+const authenticationRouter = express.Router();
 
 authenticationRouter.post('/', async function(req, res) {
 	// find the user
@@ -41,7 +46,9 @@ authenticationRouter.post('/', async function(req, res) {
 			var options = {
 				expiresIn: 86400 // expires in 24 hours
 			}
+
 			var token = jwt.sign(payload, config.superSecret, options);
+			//res.cookie("tokenValue",token)
 			if(req.body.type == "student"){
 				res.redirect(url.format({
 					pathname: "/api/v2/checker",

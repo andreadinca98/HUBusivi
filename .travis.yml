@@ -26,5 +26,3 @@ install:
   - "npm install"
 before_script:
   - "npm info dredd version"
-after_script:
-  - "mocha --exit"
