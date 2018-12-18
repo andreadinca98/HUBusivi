@@ -331,12 +331,32 @@ paths:
         200:
           description: Successful response 
       
-  /admin:
-    post:
+  /admin/{AdminId}:
+    parameters:
+        - name: AdminId
+          in: path
+          description: ID of admin to fetch
+          required: true
+          type: string
+          x-example: '1234'
+    get:
       tags:
-      - "Admin"
-      description: Adds a Mark (only teacher)
-      operationId: addAdmin
+        - "Admin"
+      security:
+        - Authentions: []
+      description: Returns admin after login
+      operationId: getAdminId
+      
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful Response
+  /admin/Teacher:
+    post:
+      operationId: addTeacher
       parameters:
         - name: mark
           in: query
@@ -370,10 +390,9 @@ paths:
           description: Resources not found
         200:
           description: Successful response
-  #qua bisogna decidere il percorso  
+ 
     put:
-      description: Adds a teacher
-      operationId: Add Assignment
+      operationId: Add teacher
       parameters:
         - name: id
           in: query
@@ -390,11 +409,6 @@ paths:
           description: name of teacher
           type: string
           x-example: "Giorgio"
-        - name: surname
-          in: query
-          description: surname of the teacher
-          type: string
-          x-example: "Rodi"
         - name: password
           in: query
           description: password for the logitemn
@@ -407,9 +421,9 @@ paths:
           description: Resources not found
         200:
           description: Successful response
-  #modificare percorso
+  
     delete:
-      description: Removes a teacher from the database
+      description: Add, update and delete student from database
       operationId: RemoveTeacher
       parameters:
         - name: id_teacher
@@ -425,10 +439,8 @@ paths:
         200:
           description: Successful response
   
-  
-  /students:
+  /admin/Student:
     post:
-      description: Adds a student on the database
       operationId: addStudent
       parameters:
         - name: id
@@ -462,9 +474,40 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Students'
-  
+    
+    put:
+      operationId: Add Student
+      parameters:
+        - name: id
+          in: query
+          description: id of the teacher
+          type: integer
+          x-exaple: 128888
+        - name: email
+          in: query
+          description: email of the teacher
+          type: string
+          x-example: "prof@gmail.com"
+        - name: name
+          in: query
+          description: name of teacher
+          type: string
+          x-example: "Giorgio"
+        - name: password
+          in: query
+          description: password for the logitemn
+          type: string
+          x-example: "grodi"
+      responses:
+        400:
+          description: Bad request
+        404:
+          description: Resources not found
+        200:
+          description: Successful response          
+    
     delete:
-      description: Removes a student from the database
+      description: Add, update and delete student from database
       operationId: removeStudent
       parameters:
         - name: id_student
