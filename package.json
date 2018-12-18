@@ -5,7 +5,7 @@
   "main": "api.js",
   "scripts": {
     "start": "nodemon app.js",
-    "test" : "jest"
+    "test" : "mocha ./test/*.test.js"
   },
   "mocha.options": {
     "opts": "mocha.opts"
