@@ -1,4 +1,4 @@
-//Relation between mark student
+//Relation between courses and students
 const mongoose = require('mongoose');
 
 const courseStudentSchema = mongoose.Schema({
@@ -7,4 +7,4 @@ const courseStudentSchema = mongoose.Schema({
     assignmentId: { type: String, require: true }
 });
 
-module.exports = mongoose.model('markStudent', courseStudentSchema);
+module.exports = mongoose.model('courseStudent', courseStudentSchema);

@@ -3,6 +3,7 @@ const jwt     = require('jsonwebtoken'); // used to create, sign, and verify tok
 const config  = require('../config.js'); // get our config file
 const Student = require('../models/student.js');
 const Teacher = require('../models/teacher.js');
+const Admin = require('../models/admin.js');
 const url 	  = require('url')
 
 const authenticationRouter = express.Router(); 
@@ -16,20 +17,19 @@ authenticationRouter.post('/', async function(req, res) {
 	if(req.body.type == "teacher"){
 		user = await Teacher.findOne( { name: req.body.name } )
 	}
+	if(req.body.type == "admin"){
+		user = await Admin.findOne( { name: req.body.name } )
+	}
 	
 	if (!user) {
 		// user not found
-		res.json({ success: false, message: 'Authentication failed. User not found.' });
-		
+		res.json({ success: false, message: 'Authentication failed. User not found.' });		
 	} else {
-
 		// check if password matches
 		if (user.password != req.body.password) {
 			// wrong password
 			res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-
 		} else {
-
 			// if user is found and password is right
 			// create a token
 			var payload = {
@@ -56,6 +56,16 @@ authenticationRouter.post('/', async function(req, res) {
 					query: {
 						"id" : user.id,
 						"t" : "t",
+						"token" : token
+					}
+				}))	
+			}
+			if(req.body.type == "admin"){
+				res.redirect(url.format({
+					pathname: "/api/v2/checker",
+					query: {
+						"id" : user.id,
+						"t" : "a",
 						"token" : token
 					}
 				}))	
