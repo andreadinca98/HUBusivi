@@ -14,3 +14,5 @@ Pretto Stefano
 Apiary: https://hubusivi.docs.apiary.io/#
 <br><br>
 Heroku: https://ingegneriasoftwa2.herokuapp.com/
+<br><br>
+Travis: https://travis-ci.org/andreadinca98/HUBusivi
