@@ -19,30 +19,18 @@ describe('POST Teacher', function(){
     })
 })
 
-
-// create a token
-var payload = {
-    id: 'fadsa',
-    name: 'Bruno Villa'
-}
-var options = {
-    expiresIn: 86400 // expires in 24 hours
-}
-
-var token = jwt.sign(payload, config.superSecret, options);
-
-describe('GET /api/v2/teachers/:idTeacher?token=<valid>', function(){
-    it("returns status 200", function(done){
-        request(teacher).get("/api/v2/teachers/5c17b343e9bb211bd4e3403?token="+token)
-            .expect(200);
-        done();
-    })
-    after(function(){
-        process.exit(0)
-    })
-
+describe('RESEARCH on Teacher by Teacher Id', function(){
+  it("returns status 500", function(done){
+      request(teacher).get("/aaaa")
+          .expect(500);
+      done();
+  })
+  it("returns status 200",function(done){
+      request(teacher).get("/5c07d66106ea3145c4b9bc1c")
+          .expect(200);
+      done();
+  })
 })
-
 
 describe('DELETE Teacher', function(){
     it("returns status 200", function(done){

@@ -25,7 +25,7 @@ router.get('/', function(req, res){
 })
 
 //funzione per ricevere solo i corsi disponibili dallo studente
-router.get('/:courseId', function (req, res) {
+/*router.get('/:courseId', function (req, res) {
 	console.log('Getting courses for id')
 	coursestudent.find({courseId: req.params.courseId}, function (err, foundCourse){
 		if (err) {
@@ -36,8 +36,20 @@ router.get('/:courseId', function (req, res) {
 			res.json(foundCourse);
 		}
 	})
+})*/
+router.get('/:studentid', function (req, res) {
+    console.log('Getting courses for id')
+    console.log(req.params.studentid)
+	coursestudent.find({studentId: req.params.studentid}, function (err, foundCourse){
+		if (err) {
+			console.log(err)
+			res.status(500).send();
+		}
+		else {
+			res.json(foundCourse);
+		}
+	})
 })
-
 router.post('/', (req,res) =>{
 	const cStudent = new coursestudent({
         studentId: req.body.studentId,

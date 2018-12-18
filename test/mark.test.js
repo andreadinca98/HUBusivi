@@ -24,3 +24,17 @@ describe('DELETE Marks', function(){
         done();
     })
 })
+
+
+describe('RESEARCH on Mark by Student Id', function(){
+    it("returns status 500", function(done){
+        request(mark).get("/aaaa")
+            .expect(500);
+        done();
+    })
+    it("returns status 200",function(done){
+        request(mark).get("/5c07d66106ea3145c4b9bc1c")
+            .expect(200);
+        done();
+    })
+})
