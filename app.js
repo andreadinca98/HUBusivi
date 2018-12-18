@@ -10,6 +10,7 @@ app.use(express.static('./public'))
 
 const routerStudent = require('./routes/students.js')
 const routerTeacher = require('./routes/teachers.js')
+const routerAdmin = require('./routes/admins.js')
 const routerAssignment = require('./routes/assignment.js')
 const routerMarks = require('./routes/marks.js')
 const routercouseStudent = require('./routes/courseStudent.js')
@@ -27,13 +28,12 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//quello che fa nella pagina localhost:3000 -> Hello World!
-
 //vari routers alle varie pagine 
+app.use('/api/v2/students',routerStudent);
 app.use('/api/v2/teachers',routerTeacher)
+app.use('/api/v2/admins',routerAdmin);
 app.use('/api/v2/courses', routerCourses)
 app.use('/api/v2/marks',routerMarks)
-app.use('/api/v2/students',routerStudent);
 app.use('/api/v2/authentications', routerAuthentication)
 app.use('/api/v2/assignments', routerAssignment)
 app.use('/api/v2/apis', routerApis)
@@ -41,24 +41,50 @@ app.use('/api/v2/checker', routerCheck)
 app.use('/api/v2/courseStudent', routercouseStudent)
 
 app.get('/', (req, res) => {
-    //res.writeHead(200, {"Content-Type": "text/html"}); 
-    //res.end('<p><html><body><h1>LOG-IN</h1><hr><form action= \"/api/v2/authentications\" method=\"POST\">Username: <input type = \"text\" name = \"name\"><br><br>Password: <input type = \"password\" name = \"password\"><br><br><input type=\"radio\" name=\"type\" value=\"student\" checked=\"true\"> Student<br><input type=\"radio\" name=\"type\" value=\"teacher\"> Teacher<br><button>Log-in</button><br></form></body></html></p>');
     res.sendFile(path.join(__dirname + '/public/login.html'))
 })
 app.listen(PORT, () => console.log('Example app listening on port: ' + PORT))
 
 app.get('/api/v2/addAssignment', (req, res) => {
-    //res.writeHead(200, {"Content-Type": "text/html"}); 
     res.sendFile(path.join(__dirname + '/public/addAssignment.html'))
 })
 app.get('/api/v2/addMarks', (req, res) => {
-    //res.writeHead(200, {"Content-Type": "text/html"}); 
     res.sendFile(path.join(__dirname + '/public/addMarks.html'))
 })
+app.get('/api/v2/addUser', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/addUser.html'))
+})
+app.get('/api/v2/addStudent', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/addStudent.html'))
+})
+app.get('/api/v2/removeStudent', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/removeStudent.html'))
+})
+app.get('/api/v2/removeTeacher', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/removeTeacher.html'))
+})
+
 app.get('/api/v2/uploadAssignment/:studentId', (req, res) => {
     //res.writeHead(200, {"Content-Type": "text/html"}); 
     res.sendFile(path.join(__dirname + '/public/uploadAssignment.html'))
 })
+
+app.post('/api/v2/control', (req, res) => {
+    console.log("22222")
+    if(req.body.type == "student"){
+		res.redirect(url.format({
+            pathname: "/api/v2/student",
+            query: {
+                "id" : user.id,
+                "t" : "a",
+                "token" : token
+            }
+        }))	
+	}
+	if(req.body.type == "teacher"){
+	}
+})
+
 //ERRORI: se non è stato fatto nulla di quello sopra allora darà un errore
 app.use((req,res,next)=>{
     const error = new Error('Page not found');

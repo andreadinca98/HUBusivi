@@ -105,39 +105,4 @@ router.delete('/:assignmentId', (req,res) =>{
 	
 })
 
-/*router.update('/assignment/:assignmentId', (req,res) =>{
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'admin',
-        password: 'root',
-        database: 'is2'
-    })
-    var tipo = 4
-    const queryString = "SELECT * FROM users WHERE matricola = ?"
-    connection.query(queryString,[matricola],(err, rows, fields) =>{
-        if(err){
-            console.log("Failed to query for users: " + err )
-            res.sendStatus(500)
-            return
-        }
-        tipo = res.rows()
-    })
-    if(tipo = 0){    
-        const assignmentId = req.params.assignmentId
-        const expiredata = req.body.data;
-        const name = req.body.name;
-        const text = req.body.text;
-
-        queryString = "UPDATE assignments(name, text, expire_date, upload_date) VALUES (?,?,?,?) WHERE assignmentid = ?"
-        connection.query(queryString,[assignmentId],(err, rows, fields) =>{
-            if(err){
-                console.log("Failed to query for users: " + err )
-                res.sendStatus(500)
-                return
-            }
-            res.send("inserimento corretto")
-        })
-    }
-})*/
-
 module.exports = router

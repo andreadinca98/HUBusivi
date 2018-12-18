@@ -29,12 +29,6 @@ const tokenChecker = function(req, res, next) {
 							'<form action= \"/api/v2/marks/' + s + '?token='+token+'\" method=\"GET\"><button>Visualizza i voti</button></form></body></html></p>');
 					}
 				if(t == "t"){
-					/*res.redirect(url.format({
-						pathname: "/api/v2/courses/"+s,
-						body: {
-							"token" : token
-						}
-					}))*/
 					res.writeHead(200, {"Content-Type": "text/html"}); 
 					res.end('<p><html><body><h1>User home page </h1><hr><form action= \"/api/v2/assignments/'+ s +'?token='+token+'\" method=\"GET\"><button>Visualizza gli assignment</button></form>'+
 						 '<form action= \"/api/v2/courses/' + s + '?token='+token+'\" method=\"GET\"><button>Visualizza i corsi</button></form>'+
@@ -42,7 +36,16 @@ const tokenChecker = function(req, res, next) {
 						 '<form action= \"/api/v2/addMarks?token='+token+'\" method=\"GET\"><button>Carica voto</button></form>'+
 						 '<form action= \"/api/v2/students?token='+token+'\" method=\"GET\"><button>Visualizza studenti</button></form>'+
 						 '<form action= \"/api/v2/marks/' + s + '?token='+token+'\" method=\"GET\"><button>Visualizza i voti</button></form></body></html></p>');
-				}				
+				}
+				if(t == "a"){
+					res.writeHead(200, {"Content-Type": "text/html"});
+					res.end('<p><form action= \"/api/v2/addStudent\" method=\"GET\"><button>Aggiungi Studente</button>' +
+					'<form action= \"/api/v2/addTeacher\" method=\"GET\"><button>Aggiungi Teacher</button></form>' + 
+					'<form action= \"/api/v2/removeStudent\" method=\"GET\"><button>Rimuovi Studente</button> ' +
+					'<form action= \"/api/v2/removeTeacher\" method=\"GET\"><button>Rimuovi Teacher</button></form>'+
+					'<form action= \"/api/v2/teachers\" method=\"GET\"><button>Vedi tutti i teacher</button>'+
+					'<form action= \"/api/v2/students\" method=\"GET\"><button>Vedi tutti gli studenti</button></p>')
+					}				
 			}
 		});
 	} else {

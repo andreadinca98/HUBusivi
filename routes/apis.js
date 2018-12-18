@@ -29,10 +29,6 @@ apiRoutes.get('/', function(req,res) {
 		}
 	}))
 	apiRoutes.use(tokenChecker)
-	if(req.body.t == "s")
-		console.log("s")
-	if(req.body.t == "t")
-		console.log("t")
 })
 
 

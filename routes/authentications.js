@@ -3,10 +3,12 @@ const jwt     = require('jsonwebtoken'); // used to create, sign, and verify tok
 const config  = require('../config.js'); // get our config file
 const Student = require('../models/student.js');
 const Teacher = require('../models/teacher.js');
+const Admin = require('../models/admin.js');
 const url 	  = require('url')
-const cookieParser = require('cookie-parser')
 
-/*
+/*const cookieParser = require('cookie-parser')
+
+
 res.cookie(name_of_cookie, value_of_cookie);
 
 authenticationRouter.use(cookieParser()) */
@@ -21,6 +23,9 @@ authenticationRouter.post('/', async function(req, res) {
 	if(req.body.type == "teacher"){
 		user = await Teacher.findOne( { name: req.body.name } )
 	}
+	if(req.body.type == "admin"){
+		user = await Admin.findOne( { name: req.body.name } )
+	}
 	
 	if (!user) {
 		// user not found
@@ -28,7 +33,6 @@ authenticationRouter.post('/', async function(req, res) {
 		res.writeHead(200, {"Content-Type": "text/html"}); 
 		res.end('<p><html><body><h1>Autenticazione fallita. Utente non trovato!</h1><form action= \"/\" method=\"GET\"><button>Torna al login</button></form></body></html></p>');
 	} else {
-
 		// check if password matches
 		if (user.password != req.body.password) {
 			// wrong password
@@ -36,7 +40,6 @@ authenticationRouter.post('/', async function(req, res) {
 			res.writeHead(200, {"Content-Type": "text/html"}); 
 			res.end('<p><html><body><h1>Autenticazione fallita. Password errata!</h1><form action= \"/\" method=\"GET\"><button>Torna al login</button></form></body></html></p>');
 		} else {
-
 			// if user is found and password is right
 			// create a token
 			var payload = {
@@ -65,6 +68,16 @@ authenticationRouter.post('/', async function(req, res) {
 					query: {
 						"id" : user.id,
 						"t" : "t",
+						"token" : token
+					}
+				}))	
+			}
+			if(req.body.type == "admin"){
+				res.redirect(url.format({
+					pathname: "/api/v2/checker",
+					query: {
+						"id" : user.id,
+						"t" : "a",
 						"token" : token
 					}
 				}))	
