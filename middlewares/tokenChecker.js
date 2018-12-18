@@ -35,6 +35,7 @@ const tokenChecker = function(req, res, next) {
 						 '<form action= \"/api/v2/addAssignment?token='+token+'\" method=\"GET\"><button>Carica assignment</button></form>'+
 						 '<form action= \"/api/v2/addMarks?token='+token+'\" method=\"GET\"><button>Carica voto</button></form>'+
 						 '<form action= \"/api/v2/students?token='+token+'\" method=\"GET\"><button>Visualizza studenti</button></form>'+
+						 '<form action= \"/api/v2/marks?token='+token+'\" method=\"GET\"><button>Media voti assignment</button></form>'+
 						 '<form action= \"/api/v2/marks/' + s + '?token='+token+'\" method=\"GET\"><button>Visualizza i voti</button></form></body></html></p>');
 				}
 				if(t == "a"){

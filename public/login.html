@@ -1,0 +1,15 @@
+<html>
+    <head>
+            <!---<link href="styleHome.css" rel="stylesheet" type="text/css">-->
+    </head>
+    <body>
+        <h1>LOG-IN</h1><hr>
+        <form action= "/api/v2/authentications" method="POST">
+            Username: <input type = "text" name = "name"><br><br>
+            Password: <input type = "password" name = "password"><br><br>
+            <input type="radio" name="type" value="student" checked="true"> Student<br>
+            <input type="radio" name="type" value="teacher"> Teacher<br>
+            <button>Log-in</button><br>
+        </form>
+    </body>
+</html>
