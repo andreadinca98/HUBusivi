@@ -2,7 +2,7 @@
 
 <b>Data di inizio del progetto:</b>
 
-30 ottobre 2018
+30 ottobre 2018<br>
 Membri:
 
 Andrea D'Incà<br>
