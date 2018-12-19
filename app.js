@@ -70,13 +70,6 @@ app.get('/api/v2/removeStudent', (req, res) => {
 app.get('/api/v2/removeTeacher', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/removeTeacher.html'))
 })
-<<<<<<< HEAD
-=======
-app.get('/api/v2/removeCourses', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/removeCourses.html'))
-})
-
->>>>>>> 97316aebe8ae9a1dce21e36457666d8c20b40cd5
 app.get('/api/v2/uploadAssignment/:studentId', (req, res) => {
     //res.writeHead(200, {"Content-Type": "text/html"}); 
     res.sendFile(path.join(__dirname + '/public/uploadAssignment.html'))
