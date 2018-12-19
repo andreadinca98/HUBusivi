@@ -37,7 +37,7 @@ coursesRouter.get('/admin', (req,res,next) => {
 
 
 //get tramite id
-coursesRouter.get('/:coursesId', function (req, res) {
+/*coursesRouter.get('/:coursesId', function (req, res) {
 	console.log('Getting courses for id')
 	Course.find({ $or: [{ s_id: req.params.coursesId }, { t_id: req.params.coursesId }] }, function (err, foundCourses) {
 		if (err) {
@@ -48,12 +48,12 @@ coursesRouter.get('/:coursesId', function (req, res) {
 			res.json(foundCourses)
 		}
 	})
-})
+})*/
 
 //get tramite id
 coursesRouter.get('/:userId', function (req, res) {
     console.log('Getting courses for id')
-    Course.find({ $or: [{ s_id: req.params.userId }, { t_id: req.params.userId }] }, function (err, foundCourses) {
+    Course.find({ $or: [{ studentId: req.params.userId }, { teacherId: req.params.userId }] }, function (err, foundCourses) {
         if (err) {
             console.log(err)
             res.status(500).send();
