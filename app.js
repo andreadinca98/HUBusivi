@@ -57,11 +57,21 @@ app.get('/api/v2/addUser', (req, res) => {
 app.get('/api/v2/addStudent', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/addStudent.html'))
 })
+app.get('/api/v2/addTeacher', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/addTeacher.html'))
+})
+app.get('/api/v2/addCourse', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/addCourse.html'))
+})
+
 app.get('/api/v2/removeStudent', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/removeStudent.html'))
 })
 app.get('/api/v2/removeTeacher', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/removeTeacher.html'))
+})
+app.get('/api/v2/removeCourses', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/removeCourses.html'))
 })
 
 app.get('/api/v2/uploadAssignment/:studentId', (req, res) => {

@@ -18,6 +18,24 @@ coursesRouter.get('/', function (req, res) {
 	})
 })
 
+coursesRouter.get('/admin', (req,res,next) => {
+	Course
+	.find()
+	.exec()
+	.then(docs => {
+		console.log(docs);
+		res.status(200).json(docs);
+	})
+	.catch(err => {
+		console.log(err);
+		res.status(500).json({
+			message: 'Errore in /students GET',
+			error: err
+		});
+	});
+});
+
+
 //get tramite id
 coursesRouter.get('/:coursesId', function (req, res) {
 	console.log('Getting courses for id')
