@@ -31,6 +31,7 @@ usersRoutes.post('/', function (req, res) {
         _id: new mongoose.Types.ObjectId(),
         mark:  req.body.mark,
         studentId:  req.body.studentId,
+        teacherId:  req.body.teacherId,
         assignmentId:  req.body.assignmentId				
 	});
 	
@@ -110,22 +111,19 @@ usersRoutes.delete('/:marksId', (req,res,next) => {
 });
 
 //Restituisce gli marks con quelli ID
-usersRoutes.get('/:couseId', (req,res,next) => {	
-	const couseId = req.params.couseId;
-	Marks.findById(couseId)
-	.exec()
-	.then(doc => {		
-		console.log(doc),		
-		res.status(200).json(doc)
-	})
-	.catch(err => {
-		console.log(err);
-		res.status(500).json({
-			message: "Non è stato trovato il voto",
-			error: err
-		});
-	});
-});
+usersRoutes.get('/:userId', (req,res,next) => {
+	console.log('Getting courses for id')
+    Marks.find({ $or: [{ studentId: req.params.userId }, { teacherId: req.params.userId }] }, function (err, foundCourses) {
+        if (err) {
+            console.log(err)
+            res.status(500).send();
+        }
+        else {
+			res.status(200).json(foundCourses)
+
+        }
+    })
+})
 
 
 module.exports = usersRoutes;
