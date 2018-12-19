@@ -3,6 +3,24 @@ const adminsRoutes = express.Router();
 const mongoose = require('mongoose');
 const Admin = require('../models/admin.js'); 
 
+//Restituisce gli studenti con quelli ID
+adminsRoutes.get('/', (req,res,next) => {	
+	Admin.find()
+	.exec()
+	.then(doc => {		
+		console.log(doc),		
+		res.status(200).json(doc)
+	})
+	.catch(err => {
+		console.log(err);
+		res.status(500).json({
+			message: "Nessun admin presente",
+			error: err
+		});
+	});
+});
+
+
 //Inserisci studente nel DB, andare in body di Postman 
 //e aggiungere in linguaggio JSON email,nome e cognome
 adminsRoutes.post('/', function (req, res) {	

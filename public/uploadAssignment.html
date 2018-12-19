@@ -9,7 +9,8 @@
         Upload a completed assignment <br/><hr>
         <form action= "/api/v2/assignments" method="POST">
             Assignment id: <input type = "text" name = "tAssignment"><br><br>
-            <!----Student id: <input type = "text" name = "tStudent"><br><br>--->
+            Student id: <input type = "text" name = "studentId"><br><br>
+            Course id: <input type = "text" name = "courseId"><br><br>
             Text: <input type = "text" name = "text"><br><br> 
             <input type ="text" name ="complete" value="true" style="visibility: hidden" ><br>
             <button style="border-radius:12px;">Create</button>

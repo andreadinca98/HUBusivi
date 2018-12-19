@@ -26,33 +26,16 @@ router.get('/', function(req, res){
 //funzione per ricevere solo i corsi disponibili dallo studente
 router.get('/:userId', function (req, res) {
     console.log('Getting Assignment for id')
-    var stud = Student.findOne({_id: req.params.userId})
-    var teach = Teacher.findOne({_id: req.params.userId})
-    if(stud){
-        Assignment.find({ $and: [{ studentId: req.params.userId }, { active: true }] }, function (err, foundAssignments) {
+        Assignment.find({$or:[{ $and: [{ studentId: req.params.userId }, { active: true }] }, {teacherId: req.params.userId}]}, function (err, foundAssignments) {
             if (err) {
                 console.log(err)
                 res.status(500).send();
             }
             else {
-                console.log(req.query.token)
+                //console.log(req.query.token)
                 res.json(foundAssignments)
             }
         })
-    }
-	if(teach){
-        Assignment.find({teacherId: req.params.userId}, function (err, foundAssignments) {
-            if (err) {
-                console.log(err)
-                res.status(500).send();
-            }
-            else {
-                console.log(req.query.token)
-                res.json(foundAssignments)
-            }
-        })
-    }
-    res.send('Nessun assignment trovato per id dato')
 })
 
 router.post('/', (req,res) =>{
@@ -64,7 +47,8 @@ router.post('/', (req,res) =>{
         name: req.body.name,
         expireData: req.body.expireData,
         uploadData: t,
-        studentId: req.headers.studentId,
+        studentId: req.body.studentId,
+        teacherId: req.body.teacherId,
         courseId: req.body.courseId,
         complete: req.body.complete
     })
