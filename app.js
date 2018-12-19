@@ -63,10 +63,12 @@ app.get('/api/v2/removeStudent', (req, res) => {
 app.get('/api/v2/removeTeacher', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/removeTeacher.html'))
 })
-
 app.get('/api/v2/uploadAssignment/:studentId', (req, res) => {
     //res.writeHead(200, {"Content-Type": "text/html"}); 
     res.sendFile(path.join(__dirname + '/public/uploadAssignment.html'))
+})
+app.get('/api/v2/averageMarks', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/assignmentAverage.html'))
 })
 
 app.post('/api/v2/control', (req, res) => {

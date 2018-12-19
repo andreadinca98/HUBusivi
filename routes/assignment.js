@@ -4,6 +4,8 @@ const bodyParser = require('body-parser')
 const app = express()
 const mongoose = require('mongoose')
 const Assignment = require('../models/assignment.js')
+const Student = require('../models/student.js')
+const Teacher = require('../models/teacher.js')
 
 app.use(bodyParser.urlencoded({extended: false}))
 
@@ -22,18 +24,35 @@ router.get('/', function(req, res){
 })
 
 //funzione per ricevere solo i corsi disponibili dallo studente
-router.get('/:studentId', function (req, res) {
-	console.log('Getting courses for id')
-	Assignment.find({ $and: [{ studentId: req.params.studentId }, { active: true }] }, function (err, foundAssignments) {
-		if (err) {
-			console.log(err)
-			res.status(500).send();
-		}
-		else {
-            console.log(req.query.token)
-			res.json(foundAssignments)
-		}
-	})
+router.get('/:userId', function (req, res) {
+    console.log('Getting Assignment for id')
+    var stud = Student.findOne({_id: req.params.userId})
+    var teach = Teacher.findOne({_id: req.params.userId})
+    if(stud){
+        Assignment.find({ $and: [{ studentId: req.params.userId }, { active: true }] }, function (err, foundAssignments) {
+            if (err) {
+                console.log(err)
+                res.status(500).send();
+            }
+            else {
+                console.log(req.query.token)
+                res.json(foundAssignments)
+            }
+        })
+    }
+	if(teach){
+        Assignment.find({teacherId: req.params.userId}, function (err, foundAssignments) {
+            if (err) {
+                console.log(err)
+                res.status(500).send();
+            }
+            else {
+                console.log(req.query.token)
+                res.json(foundAssignments)
+            }
+        })
+    }
+    res.send('Nessun assignment trovato per id dato')
 })
 
 router.post('/', (req,res) =>{
@@ -70,7 +89,7 @@ router.post('/', (req,res) =>{
 //funzione che cambia active a falso se oggi è scaduto l'assigment
 router.put('/', (req,res) =>{
     const today = new Date();
-    const t = today.getDate() + "-" + (today.getMonth()+1) + "-" + today.getFullYear();
+    const t = today.getFullYear() + (today.getMonth()+1) + "-" + today.getDate();
     Assignment.find({}, function(err, foundAssignments){
         if (err) {
 			console.log(err)
@@ -104,5 +123,7 @@ router.delete('/:assignmentId', (req,res) =>{
 	})
 	
 })
+
+
 
 module.exports = router

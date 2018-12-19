@@ -71,8 +71,9 @@ usersRoutes.post('/', function (req, res) {
 });*/
 
 //average 
-usersRoutes.get('/:assignmentId', (req,res,next) => {	
-	const assignmentid = req.params.assignmentId;
+usersRoutes.get('/averageM', function (req,res,next){	
+	const assignmentid = req.query.assignmentId;
+	console.log(assignmentid)
 	Marks.find({assignmentId: assignmentid}, function (err, foundMarks) {
 		if (err) {
 			console.log(err)
