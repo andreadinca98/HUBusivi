@@ -23,16 +23,16 @@ const tokenChecker = function(req, res, next) {
 
 				if(t == "s"){
 					res.writeHead(200, {"Content-Type": "text/html"}); 
-   					res.end('<p><html><body><h1>User home page </h1><hr><form action= \"/api/v2/assignments/'+ s +'?token='+token+'\" method=\"GET\"><button>Visualizza gli assignment</button></form>'+
+   					res.end('<p><html><body><h1>User home page </h1><hr><form action= \"/api/v2/assignments/'+ s +'?token='+token+'\" method=\"GET\"><button style="border-radius:12px;">Visualizza gli assignment</button></form>'+
 							'<form action= \"/api/v2/courseStudent/' + s + '?token='+token+'\" method=\"GET\"><button style="border-radius:12px;">Visualizza i corsi</button></form>'+
 							'<form action= \"/api/v2/uploadAssignment/' + s + '?token='+token+'\" method=\"GET\"><button style="border-radius:12px;">Carica un assignment completato</button></form>'+
 							'<form action= \"/api/v2/marks/' + s + '?token='+token+'\" method=\"GET\"><button style="border-radius:12px;">Visualizza i voti</button></form></body></html></p>');
 					}
 				if(t == "t"){
 					res.writeHead(200, {"Content-Type": "text/html"}); 
-					res.end('<p><html><body><h1>User home page </h1><hr><form action= \"/api/v2/assignments/'+ s +'?token='+token+'\" method=\"GET\"><button>Visualizza gli assignment</button></form>'+
+					res.end('<p><html><body><h1>User home page </h1><hr><form action= \"/api/v2/assignments/'+ s +'?token='+token+'\" method=\"GET\"><button style="border-radius:12px;">Visualizza gli assignment</button></form>'+
 						 '<form action= \"/api/v2/courses/' + s + '?token='+token+'\" method=\"GET\"><button style="border-radius:12px;">Visualizza i corsi</button></form>'+
-						 '<form action= \"/api/v2/addAssignment?token='+token+'\" method=\"GET\"><buttonstyle="border-radius:12px;">Carica assignment</button></form>'+
+						 '<form action= \"/api/v2/addAssignment?token='+token+'\" method=\"GET\"><button style="border-radius:12px;">Carica assignment</button></form>'+
 						 '<form action= \"/api/v2/addMarks?token='+token+'\" method=\"GET\"><button style="border-radius:12px;">Carica voto</button></form>'+
 						 '<form action= \"/api/v2/students?token='+token+'\" method=\"GET\"><button style="border-radius:12px;">Visualizza studenti</button></form>'+
 						 '<form action= \"/api/v2/averageMarks?token='+token+'\" method=\"GET\"><button style="border-radius:12px;">Media voti assignment</button></form>'+
