@@ -73,7 +73,7 @@ router.post('/', (req,res) =>{
 //funzione che cambia active a falso se oggi è scaduto l'assigment
 router.put('/', (req,res) =>{
     const today = new Date();
-    const t = today.getFullYear() + (today.getMonth()+1) + "-" + today.getDate();
+    const t = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate();
     Assignment.find({}, function(err, foundAssignments){
         if (err) {
 			console.log(err)
