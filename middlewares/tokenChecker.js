@@ -40,12 +40,15 @@ const tokenChecker = function(req, res, next) {
 				}
 				if(t == "a"){
 					res.writeHead(200, {"Content-Type": "text/html"});
-					res.end('<p><html><body><h1>Admin home page </h1><hr><form action= \"/api/v2/addStudent\" method=\"GET\"><button style="border-radius:12px;">Aggiungi Studente</button></form>' +
+					res.end('<p><html><body><h1>Admin home page </h1><hr> <h4>Inserisci risorsa nel database</h4>' +
+					'<form action= \"/api/v2/addStudent\" method=\"GET\"><button style="border-radius:12px;">Aggiungi Studente</button></form>' +
 					'<form action= \"/api/v2/addTeacher\" method=\"GET\"><button style="border-radius:12px;">Aggiungi Teacher</button></form>' + 
-					'<form action= \"/api/v2/addCourse\" method=\"GET\"><button style="border-radius:12px;">Aggiungi corso</button></form>' +
+					'<form action= \"/api/v2/addCourse\" method=\"GET\"><button style="border-radius:12px;">Aggiungi Corso</button></form>' +
+					'<h4>Rimuovi risorsa dal database</h4>'+
 					'<form action= \"/api/v2/removeStudent\" method=\"GET\"><button style="border-radius:12px;">Rimuovi Studente</button></form> ' +
 					'<form action= \"/api/v2/removeTeacher\" method=\"GET\"><button style="border-radius:12px;">Rimuovi Teacher</button></form>'+
 					'<form action= \"/api/v2/removeCouses\" method=\"GET\"><button style="border-radius:12px;">Rimuovi Corso</button></form>' + 
+					'<h4>Visualizza risorsa dal database</h4>'+
 					'<form action= \"/api/v2/teachers\" method=\"GET\"><button style="border-radius:12px;">Vedi tutti i teacher</button></form>'+
 					'<form action= \"/api/v2/students\" method=\"GET\"><button style="border-radius:12px;">Vedi tutti gli studenti</button></form>'+
 					'<form action= \"/api/v2/courses/admin" method=\"GET\"><button style="border-radius:12px;">Vedi tutti i corsi</button></form></body></html></p>')
