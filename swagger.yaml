@@ -37,7 +37,7 @@ paths:
       tags: 
         - "Students"
       security:
-        - Authentions: []
+        - Authentications: []
       description: Returns a student from the database by name and password after login
       operationId: getStudentId
       
